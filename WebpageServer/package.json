@@ -1,0 +1,16 @@
+{
+  "name": "webpage-server",
+  "version": "1.0.0",
+  "description": "This server will store the landing page and other views of the webpage.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.2",
+    "mongoose": "^4.9.5",
+    "morgan": "^1.8.1"
+  }
+}
