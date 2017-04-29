@@ -33,7 +33,10 @@
         }).
         otherwise('/  ', {
             templateUrl: 'views/inicio.html'
-        });
+        }).
+        otherwise('/  ', {
+            templateUrl: 'views/GameRooom.html'
+        });;
         $locationProvider.html5Mode(true);
     }]);
 })();

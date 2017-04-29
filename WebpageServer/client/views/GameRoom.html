@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+  <title>Game Room</title>
+</head>
+<body ng-app="app">
+  <div class='content'>
+    <div ui-view></div>
+  </div>
+  <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+  <script type="text/javascript" src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+  <script type="text/javascript" src="scripts/ng-game.js"></script>
+
+  <!-- Modal Trigger -->
+ <a class="waves-effect waves-light btn" href="#modal1">Modal</a>
+
+ <!-- Modal Structure -->
+ <div id="modal1" class="modal">
+   <div class="modal-content">
+     <h4>New GameRoom</h4>
+     <p>A bunch of text</p>
+   </div>
+   <div class="modal-footer">
+     <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+   </div>
+ </div>
+
+</body>
+</html>
