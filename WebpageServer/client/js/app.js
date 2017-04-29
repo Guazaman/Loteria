@@ -6,7 +6,8 @@
     let equipo6 = angular.module('equipo6', [
         'ngRoute',
         'equipo6Controllers',
-        'ngSanitize'
+        'ngSanitize',
+        'ui.materialize'
     ]);
 
     equipo6.value('header', {
