@@ -1,9 +1,18 @@
 
+var mongoose = require('mongoose');
+const userSchema = require('./../../model/user');
+
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
 
 exports.postUser = function(req, res){
 	console.log("making post.. ", req.body);
+	let newUser = new userSchema({
+		name: req.body.name,
+		email: req.body.email,
+	});
+	res.send(newUser);
 }
-
 
 exports.getUser = function(req, res){
 	console.log("fetching... ", req.body);
