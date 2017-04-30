@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="es" ng-app="equipo6">
+<html lang="es" ng-app="loteriaGame">
 <head>
     <meta charset="UTF-8">
-    <title>Loteria.io</title>
-    <link href="/css/style.css" rel="stylesheet">
-    <link href="/css/libs/bootstrap.min.css" rel="stylesheet">
+    <title>loteriaGame.io</title>
+    <!-- Styles -->
     <link href="/css/libs/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/profile.css" rel="stylesheet">
     <!-- AngularJS -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular.min.js"></script>
     <script src="https://code.angularjs.org/1.6.1/angular-route.min.js"></script>
@@ -27,7 +29,7 @@
 
 <header ng-include src = "'components/header.html'"></header>
 
-<div ng-view ></div>
+<div ng-view class="view-div" ></div>
 
 <footer ng-include src="'components/footer.html'"></footer>
 
