@@ -6,7 +6,8 @@
     let equipo6 = angular.module('equipo6', [
         'ngRoute',
         'equipo6Controllers',
-        'ngSanitize'
+        'ngSanitize',
+        'ui.materialize'
     ]);
 
     equipo6.value('header', {
@@ -26,7 +27,11 @@
             templateUrl: 'views/inicio.html',
             controller: 'InicioController'
         }).
-        otherwise('/', {
+        when('/profile', {
+          templateUrl: 'views/profile.html',
+          controller: 'ProfileController'
+        }).
+        otherwise('/  ', {
             templateUrl: 'views/inicio.html'
         });
         $locationProvider.html5Mode(true);
