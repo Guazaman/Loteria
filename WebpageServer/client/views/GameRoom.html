@@ -1,18 +1,28 @@
 <!doctype html>
 <html>
 <head>
+
+  <!-- AngularJS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular.min.js"></script>
+  <script src="https://code.angularjs.org/1.6.1/angular-route.min.js"></script>
+  <script src="https://code.angularjs.org/1.6.1/angular-sanitize.min.js"></script>
+  <!-- Materialize Framework -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
+  <!-- JavaScript for: jQuery, angular, materialize, and angular-materialize. All of which are needed. -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.2.2/angular-materialize.min.js"></script>
+
   <title>Game Room</title>
 </head>
 <body ng-app="app">
+
   <div class='content'>
     <div ui-view></div>
   </div>
-  <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
-  <script type="text/javascript" src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-  <script type="text/javascript" src="scripts/ng-game.js"></script>
 
   <!-- Modal Trigger -->
- <a class="waves-effect waves-light btn" href="#modal1">Modal</a>
+ <a class="waves-effect waves-light btn" href="#modal1">New Gamer</a>
 
  <!-- Modal Structure -->
  <div id="modal1" class="modal">
