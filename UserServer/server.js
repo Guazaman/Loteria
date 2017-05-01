@@ -3,11 +3,15 @@ var app        = express();
 var bodyParser = require('body-parser');
 var router = express.Router();
 
-app.use(bodyParser.urlencoded({ extended: true }));
+var mongoose = require('mongoose');
+const dbURL = "mongodb://localhost:27017/LoteriaUsers";
+mongoose.connect(dbURL);
+
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use('/Users', require('./app/router/user'));
-//app.use('/Score', require('./app/router/score/'))
+app.use('/Scores', require('./app/router/score'))
 
 var port = process.env.PORT || 8000;
 app.listen(port);
