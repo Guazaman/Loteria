@@ -43,7 +43,7 @@
         }).
         when('/register',{
           templateUrl: 'views/register.html',
-          controller: "registerController"
+          controller: "RegisterController"
         }).
         otherwise('/  ', {
             templateUrl: 'views/inicio.html'

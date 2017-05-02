@@ -10,27 +10,27 @@
             <form class="col s12">
 
               <div class="input-field col s12">
-                <input id="username" type="text" class="validate">
-                <label for="username">Username</label>
+                <input id="name" type="text" class="validate" ng-model="registerName">
+                <label for="name">Name</label>
               </div>
 
               <div class="input-field col s12">
-                <input id="email" type="email" class="validate">
+                <input id="email" type="email" class="validate" ng-model="registerEmail">
                 <label for="email">E-mail</label>
               </div>
 
               <div class="input-field col s12">
-                <input id="password" type="password" class="validate">
+                <input id="password" type="password" class="validate" ng-model="registerPassword">
                 <label for="password">Password</label>
               </div>
 
               <div class="input-field col s12">
-                <input id="favoriteBoardGame" type="text" class="validate">
+                <input id="favoriteBoardGame" type="text" class="validate" ng-model="registerFavoriteBoardGame">
                 <label for="favoriteBoardGame">Favorite Board Game</label>
               </div>
 
               <div class="input-field col s12">
-                <input id="country" type="text" class="validate">
+                <input id="country" type="text" class="validate" ng-model="registerCountry" ng-model="registerCountry">
                 <label for="country">Country</label>
               </div>
 
@@ -41,7 +41,7 @@
       </div>
       <div class="card-action">
         <div  class="center-align">
-          <button class="btn waves-effect waves-light" type="submit" name="action">Register
+          <button class="btn waves-effect waves-light" type="submit" name="action" ng-click="registerController()">Register
             <i class="material-icons right">send</i>
           </button>
         </div>
