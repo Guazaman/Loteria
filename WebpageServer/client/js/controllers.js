@@ -22,3 +22,7 @@ loteriaGameControllers.controller('LoginController', ['$scope',  'header', funct
 loteriaGameControllers.controller('RegisterController', ['$scope',  'header', function($scope, header){
 
 }]);
+
+loteriaGameControllers.controller('WaitingController', ['$scope',  'header', function($scope, header){
+
+}]);

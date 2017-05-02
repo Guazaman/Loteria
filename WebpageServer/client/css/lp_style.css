@@ -5,6 +5,9 @@
  *
  * Made By MaterializeCSS.com
  */
+body{
+  background-image: none;
+}
 
 nav ul a,
 nav .brand-logo {

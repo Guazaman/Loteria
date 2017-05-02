@@ -24,7 +24,7 @@
     loteriaGame.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider){
         $routeProvider.
         when('/', {
-            templateUrl: 'views/inicio.html',
+            templateUrl: 'views/landingPage.html',
             controller: 'InicioController'
         }).
         when('/profile', {
@@ -44,6 +44,10 @@
         when('/register',{
           templateUrl: 'views/register.html',
           controller: "registerController"
+        }).
+        when('/waiting',{
+          templateUrl: 'views/waiting.html',
+          controller: "WaitingController"
         }).
         otherwise('/  ', {
             templateUrl: 'views/inicio.html'
