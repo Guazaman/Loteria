@@ -15,7 +15,7 @@ module.exports = function(app){
             // Error, show and send the error.
             if (err){
                 console.log(err);
-                res.send(err);
+                return res.send(err);
             }
 
             // Else (no error) return all
@@ -48,7 +48,7 @@ module.exports = function(app){
             // Get all GameRooms
             GameRoom.find(function(err, gamerooms) {
                 if (err)
-                    res.send(err);
+                    return res.send(err);
                 res.json(gamerooms);
             });
         });
@@ -61,12 +61,12 @@ module.exports = function(app){
             _id : req.params.gameroom_id
         }, function(err, gameroom) {
             if (err)
-                res.send(err);
+                return res.send(err);
 
             // Get all 
             GameRoom.find(function(err, gamerooms) {
                 if (err)
-                    res.send(err);
+                    return res.send(err);
                 res.json(gamerooms);
             });
         });
@@ -81,7 +81,7 @@ module.exports = function(app){
             // Error, show and send the error.
             if (err){
             	console.log(err);
-                res.send(err);
+                return res.send(err);
             }
 
             // Else (no error) return all cards
@@ -98,11 +98,11 @@ module.exports = function(app){
             cardName: req.body.cardName
         }, function(err, card) {
             if (err)
-                res.send(err);
+                return res.send(err);
 
             Card.find(function(err, cards) {
                 if (err)
-                    res.send(err);
+                    return res.send(err);
                 res.json(cards);
             });
         });
@@ -115,12 +115,12 @@ module.exports = function(app){
             _id : req.params.card_id
         }, function(err, card) {
             if (err)
-                res.send(err);
+                return res.send(err);
 
             // Get all Medics and Return them
             Card.find(function(err, cards) {
                 if (err)
-                    res.send(err);
+                    return res.send(err);
                 res.json(cards);
             });
         });
