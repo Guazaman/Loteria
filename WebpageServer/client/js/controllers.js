@@ -90,3 +90,7 @@ loteriaGameControllers.controller('RegisterController',  ['$scope', '$http', '$r
   });
   }
 }]);
+
+loteriaGameControllers.controller('WaitingController', ['$scope',  'header', function($scope, header){
+
+}]);
