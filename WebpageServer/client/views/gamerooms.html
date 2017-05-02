@@ -6,50 +6,107 @@
    </div>
  </nav>
 
-<sectio>
+<section>
   <div class="container">
+    <div class="row"></div>
     <div class="row">
+      <div class="col s12 m12 l12 right-align">
+          <!-- Modal Trigger -->
+          <a class="waves-effect waves-light btn" data-target='modalRoom' modal>New GameRoom</a>
+      </div>
       <div class="col s12 m12 l12">
-        <ul class="collection">
-         <li class="collection-item avatar">
-           <img src="img/default-avatar.png" alt="" class="circle">
-           <span class="title">Game Room 45</span>
-           <p>4 of 5 <br><b>Owner:</b> Chechare</p>
-           <a class="secondary-content waves-effect waves-light btn btn-small">Join</a>
-         </li>
-         <!-- Dummy game rooms... -------------------------------------------------------->
+        <div class="card ">
+          <div class="card-content">
+           <span class="card-title">Available Game Rooms</span>
+            <div class="rooms-list">
+              <ul class="collection">
+               <li class="collection-item avatar">
+                 <img src="img/default-avatar.png" alt="" class="circle">
+                 <span class="title">Game Room 45</span>
+                 <p>4 of 5 <br><b>Owner:</b> Chechare</p>
+                 <a class="secondary-content waves-effect waves-light btn btn-small">Join</a>
+               </li>
+               <!-- Dummy game rooms... -------------------------------------------------------->
 
-         <li class="collection-item avatar">
-           <img src="img/default-avatar.png" alt="" class="circle">
-           <span class="title">Game Room 69</span>
-           <p>2 of 5 <br><b>Owner:</b> Guazaman</p>
-           <a class="secondary-content waves-effect waves-light btn btn-small">Join</a>
-         </li>
-         <li class="collection-item avatar">
-           <img src="img/default-avatar.png" alt="" class="circle">
-           <span class="title">Game Room 42</span>
-           <p>1 of 5 <br><b>Owner:</b> Kimberluka</p>
-           <a class="secondary-content waves-effect waves-light btn btn-small">Join</a>
-         </li>
-         <li class="collection-item avatar">
-           <img src="img/default-avatar.png" alt="" class="circle">
-           <span class="title">Game Room 85</span>
-           <p>3 of 5 <br><b>Owner:</b> Luna Crecent</p>
-           <a class="secondary-content waves-effect waves-light btn btn-small">Join</a>
-         </li>
-         <li class="collection-item avatar">
-           <img src="img/default-avatar.png" alt="" class="circle">
-           <span class="title">Game Room 33</span>
-           <p>1 of 5 <br><b>Owner:</b>Cesar</p>
-           <a class="secondary-content waves-effect waves-light btn btn-small">Join</a>
-         </li>
-         <li class="collection-item avatar">
-           <img src="img/default-avatar.png" alt="" class="circle">
-           <span class="title">Game Room 66</span>
-           <p>3 of 5 <br><b>Owner:</b> NrML</p>
-           <a class="secondary-content waves-effect waves-light btn btn-small">Join</a>
-         </li>
+               <li class="collection-item avatar">
+                 <img src="img/default-avatar.png" alt="" class="circle">
+                 <span class="title">Game Room 69</span>
+                 <p>2 of 5 <br><b>Owner:</b> Guazaman</p>
+                 <a class="secondary-content waves-effect waves-light btn btn-small">Join</a>
+               </li>
+               <li class="collection-item avatar">
+                 <img src="img/default-avatar.png" alt="" class="circle">
+                 <span class="title">Game Room 42</span>
+                 <p>1 of 5 <br><b>Owner:</b> Kimberluka</p>
+                 <a class="secondary-content waves-effect waves-light btn btn-small">Join</a>
+               </li>
+               <li class="collection-item avatar">
+                 <img src="img/default-avatar.png" alt="" class="circle">
+                 <span class="title">Game Room 85</span>
+                 <p>3 of 5 <br><b>Owner:</b> Luna Crecent</p>
+                 <a class="secondary-content waves-effect waves-light btn btn-small">Join</a>
+               </li>
+               <li class="collection-item avatar">
+                 <img src="img/default-avatar.png" alt="" class="circle">
+                 <span class="title">Game Room 33</span>
+                 <p>1 of 5 <br><b>Owner:</b>Cesar</p>
+                 <a class="secondary-content waves-effect waves-light btn btn-small">Join</a>
+               </li>
+               <li class="collection-item avatar">
+                 <img src="img/default-avatar.png" alt="" class="circle">
+                 <span class="title">Game Room 66</span>
+                 <p>3 of 5 <br><b>Owner:</b> NrML</p>
+                 <a class="secondary-content waves-effect waves-light btn btn-small">Join</a>
+               </li>
+             </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
+
+<!-- Modal Structure -->
+<div id="modalRoom" class="modal" style="height: 600px;">
+ <div class="modal-content">
+   <h4>New GameRoom</h4>
+   <div class="input-field col s12" style="width: 200px; float:left; ">
+        <input placeholder="Game ID" id="game_id" type="text" class="validate">
+        <label for="game_id"> </label>
+        <div class="row">
+          <div class="input-field col s12" style="width: 300px">
+          <select>
+            <option value="" disabled selected >Max # of players</option>
+            <option value="1">1 player</option>
+            <option value="2">2 players</option>
+            <option value="3">3 players</option>
+            <option value="4">4 players</option>
+            <option value="5">5 players</option>
+          </select>
+        </div>
+        <form action="#">
+          <p>
+            <input name="group1" type="radio" id="test1" />
+            <label for="test1">Private</label>
+            <input name="group1" type="radio" id="test2" />
+            <label for="test2">Public</label>
+          </p>
+        </div>
+      </div>
+      <div class="input-field col s12" style="width: 200px; float:left; margin-left:200px">
+      <row>
+          <ul class="collection with-header" style="width: 250px; float:left;">
+            <a class="btn-floating btn-large waves-effect waves-light red" style="float:right;x"><i class="material-icons">+</i></a>
+          <li class="collection-header"><h4>Players</h4></li>
+          <li class="collection-item">Friend 1</li>
+          <li class="collection-item">Friend 2</li>
+          <li class="collection-item">Friend 3</li>
+          <li class="collection-item">Friend 4</li>
+          <li class="collection-item">Friend 5</li>
+        </ul>
+        <a class="waves-effect waves-light btn" >Create game</a>
+      </row>
+    </div>
+ </div>
+</div>
