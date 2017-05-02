@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+
+  <!-- Materialize Framework -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
+  <!-- JavaScript for: jQuery, angular, materialize, and angular-materialize. All of which are needed. -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.2.2/angular-materialize.min.js"></script>
+
+  <title>Game Room</title>
+</head>
+<body ng-app="app">
+
+  <div class='content'>
+    <div ui-view></div>
+  </div>
+
+  <!-- Modal Trigger -->
+ <a class="waves-effect waves-light btn" href="#modal1">End Game</a>
+
+ <!-- Modal Structure -->
+ <div id="modal1" class="modal" style="height: 400px;">
+   <div class="modal-content">
+     <h3 style="text-align: center"> Game Over!</h4>
+     <h4> Congratulations to the winners: </h3>
+
+       <ul class="collection">
+        <li class="collection-item">First Place: </li>
+        <li class="collection-item">Second Place: </li>
+        <li class="collection-item">Third Place: </li>
+
+      </ul>
+
+   </div>
+
+ </div>
+
+ <script>
+ $(document).ready(function(){
+     // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+     $('.modal').modal();
+   });
+ </script>
+
+</body>
+</html>
