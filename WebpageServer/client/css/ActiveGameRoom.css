@@ -1,9 +1,10 @@
 
-.central-div {
+.container {
+  width: 30%;
+  padding-bottom: 30%;
   margin: auto;
   top: 0;
   right: 0;
   left: 0;
-  width: 365px;
   height: 365px;
 }
