@@ -3,25 +3,25 @@
  */
 (function() {
 
-    let equipo6 = angular.module('equipo6', [
+    let loteriaGame = angular.module('loteriaGame', [
         'ngRoute',
-        'equipo6Controllers',
+        'loteriaGameControllers',
         'ngSanitize',
         'ui.materialize'
     ]);
 
-    equipo6.value('header', {
+    loteriaGame.value('header', {
         brand: 'todos',
         model: 'todos',
         type: 'todos'
     });
 
-    equipo6.value('comparar', {
+    loteriaGame.value('comparar', {
         items: [0, 0, 0],
         numero: 0
     });
 
-    equipo6.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider){
+    loteriaGame.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider){
         $routeProvider.
         when('/', {
             templateUrl: 'views/inicio.html',
@@ -29,7 +29,21 @@
         }).
         when('/profile', {
           templateUrl: 'views/profile.html',
-          controller: 'ProfileController'
+          controller: 'ProfileController',
+          css:'css/profile.css'
+        }).
+        when('/gamerooms',{
+          templateUrl: 'views/gamerooms.html',
+          controller: "GameRoomsController",
+          css:'css/gamerooms.css'
+        }).
+        when('/login',{
+          templateUrl: 'views/login.html',
+          controller: "LoginController"
+        }).
+        when('/register',{
+          templateUrl: 'views/register.html',
+          controller: "registerController"
         }).
         otherwise('/  ', {
             templateUrl: 'views/inicio.html'

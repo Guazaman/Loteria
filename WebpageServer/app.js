@@ -12,7 +12,7 @@ app.use(express.static('client'));
 app.use(logger('dev'));
 
 app.all("/*", function(req, res, next) {
-			 res.sendfile("index.html", { root: __dirname + "/client" });
+			 res.sendFile("index.html", { root: __dirname + "/client" });
  });
 
 // Escucha en el puerto 3000 y corre el server
