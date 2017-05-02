@@ -10,9 +10,11 @@ mongoose.connect(dbURL);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use('/Users', require('./app/router/user'));
-app.use('/Scores', require('./app/router/score'))
 
-var port = process.env.PORT || 8000;
+app.use('/Users', require('./app/router/user'));
+app.use('/Scores', require('./app/router/score'));
+
+
+var port = process.env.PORT || 8008;
 app.listen(port);
 console.log('Listening on port ' + port);

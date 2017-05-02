@@ -1,5 +1,3 @@
-
-
 exports.postGameRoom = function(req, res){
 	console.log("making post.. ", req.body);
 }

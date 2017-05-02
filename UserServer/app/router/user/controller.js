@@ -23,7 +23,7 @@ exports.postUser = function(req, res){
 				country: req.body.country,
 				boardgame: req.body.boardgame,
 				password: req.body.password,
-				score: 0,
+				score: 0
 			});
 
 			newUser.save(function(err){
