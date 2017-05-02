@@ -10,3 +10,7 @@ loteriaGameControllers.controller('InicioController', ['$scope',  'header', func
 loteriaGameControllers.controller('ProfileController', ['$scope',  'header', function($scope, header){
 
 }]);
+
+loteriaGameControllers.controller('GameRoomsController', ['$scope',  'header', function($scope, header){
+
+}]);

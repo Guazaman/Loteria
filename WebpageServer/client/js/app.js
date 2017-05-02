@@ -32,6 +32,11 @@
           controller: 'ProfileController',
           css:'css/profile.css'
         }).
+        when('/gamerooms',{
+          templateUrl: 'views/gamerooms.html',
+          controller: "GameRoomsController",
+          css:'css/gamerooms.css'
+        }).
         otherwise('/  ', {
             templateUrl: 'views/inicio.html'
         });
