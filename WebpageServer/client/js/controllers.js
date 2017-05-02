@@ -14,3 +14,11 @@ loteriaGameControllers.controller('ProfileController', ['$scope',  'header', fun
 loteriaGameControllers.controller('GameRoomsController', ['$scope',  'header', function($scope, header){
 
 }]);
+
+loteriaGameControllers.controller('LoginController', ['$scope',  'header', function($scope, header){
+
+}]);
+
+loteriaGameControllers.controller('RegisterController', ['$scope',  'header', function($scope, header){
+
+}]);

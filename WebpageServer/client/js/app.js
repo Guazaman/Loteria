@@ -37,6 +37,14 @@
           controller: "GameRoomsController",
           css:'css/gamerooms.css'
         }).
+        when('/login',{
+          templateUrl: 'views/login.html',
+          controller: "LoginController"
+        }).
+        when('/register',{
+          templateUrl: 'views/register.html',
+          controller: "registerController"
+        }).
         otherwise('/  ', {
             templateUrl: 'views/inicio.html'
         });
