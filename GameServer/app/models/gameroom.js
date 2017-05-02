@@ -3,11 +3,12 @@ var mongoose = require('mongoose');
 
 // Define actual model, object
 module.exports = mongoose.model('GameRoom', {
-	ownerId: String, 	
+	ownerId: { type: String, required: true},
 	name: String,
-	type: String,	
+	type: { type: String, default: 'public' },	
 	players: [String],
 	createdAt: Date,
 	winner: String,
-	maxPlayers: Number
+	status: String,
+	maxPlayers: { type: Number, max: 5, min: 2 }
 });
