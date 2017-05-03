@@ -233,4 +233,14 @@
         });
         $locationProvider.html5Mode(true);
     }]);
+
+    loteriaGame.run(['$rootScope', '$location', '$cookieStore', '$http',
+    function ($rootScope, $location, $cookieStore, $http) {
+        $rootScope.$on('$locationChangeStart', function (event, next, current) {
+            // redirect to login page if not logged in
+            if ($location.path() !== '/login' && $location.path() !== '/' && !$cookieStore.get('id')) {
+                $location.path('/login');
+            }
+        });
+    }]);
 })();
