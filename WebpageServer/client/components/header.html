@@ -2,9 +2,9 @@
   <div class="nav-wrapper">
     <a href="/" class="brand-logo"><img class="header-logo" src="img/logo.png" alt="logo"></a>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <li><a href="sass.html">Sass</a></li>
-      <li><a href="badges.html">Components</a></li>
-      <li><a href="collapsible.html">JavaScript</a></li>
+      <li ng-show="!logged"><a href="/register">Register</a></li>
+      <li ng-show="!logged"><a href="/login">Login</a></li>
+      <li ng-show="logged"><a href="/logout">Logout</a></li>
     </ul>
   </div>
 </nav>
