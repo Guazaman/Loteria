@@ -104,18 +104,17 @@ loteriaGameControllers.controller('ProfileController', ['$scope', '$http', '$roo
 loteriaGameControllers.controller('GameRoomsController', ['$scope', '$http', '$rootScope', '$cookies', '$cookieStore', '$window', function ($scope, $http, $rootScope, $cookies, $cookieStore, $window){
   var req = {
     method: 'GET',
-    url: 'http://85f1211f.ngrok.io/gamerooms'
+    url: 'http://b4ee01aa.ngrok.io/gamerooms'
   };
 
   $scope.values = [2,3,4,5];
   $scope.selectedFriends = [];
   $scope.gameRoomType = 'public';
+  $scope.statusPage = 200;
   //Hardcoded variable for testing
-  $scope.friends = ["Cesar", "Jenny", "Kimberluka", "Noel", "Ari"];
+  //$scope.friends = ["Cesar", "Jenny", "Kimberluka", "Noel", "Ari"];
 
   var today = new Date();
-
-  var loadFriends = function(){
     var loading = {
       method: 'GET',
       url: 'http://138.197.219.168:8000/Users/' + $cookieStore.get('id') +'/Friends',
@@ -124,26 +123,25 @@ loteriaGameControllers.controller('GameRoomsController', ['$scope', '$http', '$r
       // this callback will be called asynchronously
       // when the response is available
       $scope.friends = response.data;
-
+      console.log($scope.friends);
     }, function errorCallback(response) {
       // called asynchronously if an error occurs
       // or server returns response with an error status.
       console.log(response);
 
     });
-  }
 
   $scope.createNewGameController = function(){
+     $scope.selectedFriends.push($cookieStore.get('name'));
     var newGameRoom = {
       method: 'POST',
-      url: 'http://85f1211f.ngrok.io/gamerooms',
+      url: 'http://b4ee01aa.ngrok.io/gamerooms',
       data: { ownerId: $cookieStore.get('id'),
               name: $scope.gameRoomName,
               maxPlayers: $scope.gameRoomMaxPlayers ,
               status: 'Waiting',
               type: $scope.gameRoomType,
-              players: $selectedFriends.push($cookieStore.get('name'))
-
+              players:  $scope.selectedFriends
       }
     };
     $http(newGameRoom).then(function successCallback(response) {
@@ -169,6 +167,8 @@ loteriaGameControllers.controller('GameRoomsController', ['$scope', '$http', '$r
     // called asynchronously if an error occurs
     // or server returns response with an error status.
     console.log(response);
+    $scope.statusPage = 404;
+
   },
 
   $scope.newGameRoomController = function() {
