@@ -21,7 +21,7 @@ module.exports = function(app){
             // Else (no error) return all
             res.status(200);
             res.json(gamerooms);
-        });
+        }); 
     });
 
     // CREATE Hospital, get hospitals after
@@ -55,6 +55,20 @@ module.exports = function(app){
 
     });
 
+    //MODIFY a Gameroom
+    app.put('/gamerooms/:gameroom_id', function(req, res) {
+        // Create GameRoom, information comes from AJAX request from Angular
+         GameRoom.findByIdAndUpdate( req.params.gameroom_id , req.body, { new: true }, function(err, gameroom) {
+            if (err){
+                console.log(err);
+                //res.status(401);
+                return res.send(err);
+            }
+            res.json(gameroom);
+        });
+
+    });
+
     // DELETE Gameroom
     app.delete('/gamerooms/:gameroom_id', function(req, res) {
         GameRoom.remove({
@@ -75,7 +89,7 @@ module.exports = function(app){
     // GET Cards
     app.get('/cards', function(req, res) {
 
-        // Moongose used, var Medic.find();
+        // Moongose used, var Card.find();
         Card.find(function(err, cards) {
 
             // Error, show and send the error.
@@ -90,10 +104,10 @@ module.exports = function(app){
         });
     });
 
-    // CREATE Medic, get medics after
+    // CREATE Card, get cards after
     app.post('/cards', function(req, res) {
 
-        // Create MEdic, information comes from AJAX request from Angular
+        // Create Card, information comes from AJAX request from Angular
         Card.create({
             cardName: req.body.cardName
         }, function(err, card) {
@@ -109,7 +123,21 @@ module.exports = function(app){
 
     });
 
-    // DELETE Medic
+    //MODIFY a Card
+    app.put('/cards/:card_id', function(req, res) {
+        // Create GameRoom, information comes from AJAX request from Angular
+         Card.findByIdAndUpdate( req.params.card_id , req.body, { new: true }, function(err, card) {
+            if (err){
+                console.log(err);
+                //res.status(401);
+                return res.send(err);
+            }
+            res.json(card);
+        });
+
+    });
+
+    // DELETE Card
     app.delete('/cards/:card_id', function(req, res) {
         Card.remove({
             _id : req.params.card_id
@@ -117,7 +145,7 @@ module.exports = function(app){
             if (err)
                 return res.send(err);
 
-            // Get all Medics and Return them
+            // Get all Cards and Return them
             Card.find(function(err, cards) {
                 if (err)
                     return res.send(err);
