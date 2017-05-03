@@ -108,8 +108,30 @@ loteriaGameControllers.controller('GameRoomsController', ['$scope', '$http', '$r
   };
 
   $scope.values = [2,3,4,5];
+  $scope.selectedFriends = [];
+  $scope.gameRoomType = 'public';
+  //Hardcoded variable for testing
+  $scope.friends = ["Cesar", "Jenny", "Kimberluka", "Noel", "Ari"];
 
   var today = new Date();
+
+  var loadFriends = function(){
+    var loading = {
+      method: 'GET',
+      url: 'http://138.197.219.168:8000/Users/' + $cookieStore.get('id') +'/Friends',
+    };
+    $http(loading).then(function successCallback(response) {
+      // this callback will be called asynchronously
+      // when the response is available
+      $scope.friends = response.data;
+
+    }, function errorCallback(response) {
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+      console.log(response);
+
+    });
+  }
 
   $scope.createNewGameController = function(){
     var newGameRoom = {
@@ -117,11 +139,10 @@ loteriaGameControllers.controller('GameRoomsController', ['$scope', '$http', '$r
       url: 'http://85f1211f.ngrok.io/gamerooms',
       data: { ownerId: $cookieStore.get('id'),
               name: $scope.gameRoomName,
-              createdAt: today,
               maxPlayers: $scope.gameRoomMaxPlayers ,
               status: 'Waiting',
               type: $scope.gameRoomType,
-              players: [$cookieStore.get('name')]
+              players: $selectedFriends.push($cookieStore.get('name'))
 
       }
     };
@@ -141,6 +162,9 @@ loteriaGameControllers.controller('GameRoomsController', ['$scope', '$http', '$r
     // when the response is available
     console.log(response);
     $scope.gameRooms = response.data;
+    //Un-comment this line for production
+    //loadFriends();
+
   }, function errorCallback(response) {
     // called asynchronously if an error occurs
     // or server returns response with an error status.
@@ -152,9 +176,7 @@ loteriaGameControllers.controller('GameRoomsController', ['$scope', '$http', '$r
     $cookieStore.remove('id');
     $cookieStore.remove('name');
     $window.location.href = '/'
-  }
-
-);
+  });
 }]);
 
 loteriaGameControllers.controller('LoginController', ['$scope', '$http', '$rootScope', '$cookies', '$cookieStore', '$window', function ($scope, $http, $rootScope, $cookies, $cookieStore, $window){
