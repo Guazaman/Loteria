@@ -1,6 +1,6 @@
 /**
- * Created by Raptor on 13/06/16.
- */
+* Created by Raptor on 13/06/16.
+*/
 let loteriaGameControllers = angular.module('loteriaGameControllers', ['ngCookies']);
 
 loteriaGameControllers.controller('InicioController', ['$scope',  'header', function($scope, header){
@@ -8,8 +8,29 @@ loteriaGameControllers.controller('InicioController', ['$scope',  'header', func
 }]);
 
 loteriaGameControllers.controller('ProfileController', ['$scope', '$http', '$rootScope', '$cookies', '$cookieStore', '$window', function ($scope, $http, $rootScope, $cookies, $cookieStore, $window){
+  console.log("Solicitando...");
   console.log("Id: "+ $cookieStore.get('id'));
   console.log("Name: "+ $cookieStore.get('name'));
+  var req = {
+    method: 'GET',
+    url: 'http://138.197.219.168:8000/Users/' + $cookieStore.get('id') +'/Profile',
+  };
+
+  $http(req).then(function successCallback(response) {
+    // this callback will be called asynchronously
+    // when the response is available
+    $scope.profileBoardGame = response.data.boardgame;
+    $scope.profileCountry = response.data.country;
+    $scope.profileEmail = response.data.email;
+    $scope.profileName = response.data.name;
+    $scope.profileScore = response.data.score;
+  }, function errorCallback(response) {
+    // called asynchronously if an error occurs
+    // or server returns response with an error status.
+    console.log(response);
+    
+  });
+
 
 }]);
 
@@ -27,25 +48,25 @@ loteriaGameControllers.controller('LoginController', ['$scope', '$http', '$rootS
       method: 'POST',
       url: 'http://138.197.219.168:8000/Users/Login/',
       data: { email: $scope.loginEmail,
-      password: $scope.loginPassword
+        password: $scope.loginPassword
       }
     };
 
     $http(req).then(function successCallback(response) {
-    // this callback will be called asynchronously
-    // when the response is available
-    console.log("Id" + response.data.name);
-    console.log("Name:" +response.data.id);
-    $cookieStore.put('id', response.data.id);
-    $cookieStore.put('name', response.data.name);
-    $window.location.href = '/profile'
+      // this callback will be called asynchronously
+      // when the response is available
+      console.log("Id" + response.data.name);
+      console.log("Name:" +response.data.id);
+      $cookieStore.put('id', response.data.id);
+      $cookieStore.put('name', response.data.name);
+      $window.location.href = '/profile'
 
-  }, function errorCallback(response) {
-    // called asynchronously if an error occurs
-    // or server returns response with an error status.
-    console.log(response);
+    }, function errorCallback(response) {
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+      console.log(response);
 
-  });
+    });
   }
 }]);
 
@@ -66,28 +87,28 @@ loteriaGameControllers.controller('RegisterController',  ['$scope', '$http', '$r
       method: 'POST',
       url: 'http://138.197.219.168:8000/Users/',
       data: { name: $scope.registerName,
-              email: $scope.registerEmail,
-              password: $scope.registerPassword,
-              favoriteBoardGame: $scope.registerFavoriteBoardGame,
-              country: $scope.registerCountry
+        email: $scope.registerEmail,
+        password: $scope.registerPassword,
+        favoriteBoardGame: $scope.registerFavoriteBoardGame,
+        country: $scope.registerCountry
       }
     };
 
     $http(req).then(function successCallback(response) {
-    // this callback will be called asynchronously
-    // when the response is available
-    console.log(response);
-    console.log("Id" + response.data.name);
-    console.log("Name:" +response.data.id);
-    $cookieStore.put('id', response.data.id);
-    $cookieStore.put('name', response.data.name);
-    $window.location.href = '/profile'
-  }, function errorCallback(response) {
-    // called asynchronously if an error occurs
-    // or server returns response with an error status.
-    console.log(response);
+      // this callback will be called asynchronously
+      // when the response is available
+      console.log(response);
+      console.log("Id" + response.data.name);
+      console.log("Name:" +response.data.id);
+      $cookieStore.put('id', response.data.id);
+      $cookieStore.put('name', response.data.name);
+      $window.location.href = '/profile'
+    }, function errorCallback(response) {
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+      console.log(response);
 
-  });
+    });
   }
 }]);
 
