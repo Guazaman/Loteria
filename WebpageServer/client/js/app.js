@@ -73,7 +73,7 @@
         }).
         when('/scores',{
           templateUrl: 'views/scores.html',
-          //controller: "WaitingController",
+          controller: "ScoreController",
           css: "css/scores_style.css"
         }).
         otherwise('/  ', {
