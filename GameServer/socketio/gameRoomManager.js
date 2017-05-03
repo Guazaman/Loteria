@@ -1,36 +1,34 @@
-var rawCards = require('./controllers/res/cards.json');
-var userCards = require('./controllers/res/usercards.js').usercards;
+var rawCards = require('./res/cards.json');
+var userCards = require('./res/usercards.js').usercards;
 
 GameRoom = function(){
 
 	this.numPlayers = 1;
 	this.cards = rawCards.map(elem => elem.name);
-	console.log(userCards);
 	this.roomPlayers = [];
 	this.doneCards = [];
 
-	const gridCards =  5; // 12
-	const totalCards = 7; // total cards in game
-
+	/* Shuffle of an Array */
 	this.shuffle = function(array){
 		for (var i = array.length - 1; i > 0; i--) {
         	var j = Math.floor(Math.random() * (i + 1));
         	[array[i],array[j]] = [array[j],array[i]]
     	}
 	}
-
+	/* Check for cards in deck */
 	this.hasCards = function(){
 		return this.cards.length != 0;
 	}
 
+	/* Retrieve a card and push it on a stack */
 	this.drawCard = function(){
 		let drawnCard = this.cards.pop();
 		this.doneCards.push(drawnCard);
 		return drawnCard;
 	}
 
+	/* Retrieve a socket index inside roomPlayers array */
 	this.searchIndexPlayer = function(socketId){
-
 		for(i in this.roomPlayers){
 			let currentUser = this.roomPlayers[i];
 			if(currentUser.socketId == socketId){
@@ -40,6 +38,7 @@ GameRoom = function(){
 		return -1;
 	}
 
+	/* Retrieve a socket inside roomPlayers array */
 	this.searchPlayer = function(socketId){
 		for(i in this.roomPlayers){
 			let currentUser = this.roomPlayers[i];
@@ -50,11 +49,12 @@ GameRoom = function(){
 		return -1;
 	}
 
+	/* Check the validity of a certain socket card */
 	this.check = function(socketId){
 		let socket = this.searchPlayer(socketId);
 		let winner = true;
 
-		console.log("sus cartas ", socket.grid);	
+		console.log("player cards :::: ", socket.grid);	
 		console.log("current done cards::: ", this.doneCards);
 
 		socket.grid.forEach((card) => {
@@ -63,7 +63,6 @@ GameRoom = function(){
 				winner = false;
 			}
 		});
-
 		return winner;
 	} 	
 }
@@ -79,9 +78,14 @@ var globalSocket = function(){
 		this.roomMapping.set(room,newGameRoom);
 	}
 
+	this.checkRoom = function(room){
+		let gameRoom = this.roomMapping.get(room);
+		return gameRoom ? true : false;
+	}
+
+
 	this.getRoomPlayers = function(room){
 		let gameRoom = this.roomMapping.get(room);
-		console.log(gameRoom);
 		return gameRoom.numPlayers;
 	}
 
@@ -89,7 +93,6 @@ var globalSocket = function(){
 		let gameRoom = this.roomMapping.get(room);
 		gameRoom.roomPlayers.push({socketId:id, grid:undefined});
 		gameRoom.numPlayers += 1;
-		//this.roomMapping.set(id, this.getRoomPlayers(id) + 1);
 	}
 
 	this.removePlayerFromRoom = function(room, socketid){
@@ -105,9 +108,7 @@ var globalSocket = function(){
 		gameRoom.shuffle(userCards);
 
 		for(i in gameRoom.roomPlayers){
-			
 			gameRoom.roomPlayers[i].grid = userCards[i];
-			console.log(i, " FOR ", gameRoom.roomPlayers[i].grid);
 		}
 		return gameRoom;
 	}
@@ -124,6 +125,8 @@ var globalSocket = function(){
 
 }
 
+
+/* Create Singleton */
 globalSocket.instance = null;
 
 globalSocket.getInstance = function(){

@@ -9,7 +9,7 @@ var morgan = require('morgan');
 var bodyParser = require('body-parser');    			
 var methodOverride = require('method-override'); 		
 
-var port = process.env.PORT || 8081;
+var port = process.env.PORT || 8080;
 
 // Load DB configuration, and connect using mongoose.
 mongoose.connect('mongodb://localhost:27017/gameserver');
@@ -30,7 +30,7 @@ app.use(function(req, res, next){
     next();
 });
 
-var gameController = require('./controllers/gameController')(io);
+var gameController = require('./socketio/gameController')(io);
 // Routes API, load them to be used by Express.
 require('./app/router/GameRoom/controller.js')(app);
 
