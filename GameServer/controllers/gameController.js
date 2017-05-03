@@ -1,5 +1,5 @@
 var manager = require("./../socket.js");
-//manager.createRoom("Kim", "001");
+manager.createRoom("Kim", "001");
 
 const FULL = -1;
 
