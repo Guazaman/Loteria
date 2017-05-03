@@ -223,6 +223,11 @@
           controller: "GameroomController",
           css: "css/gameroom.css"
         }).
+        when('/scores',{
+          templateUrl: 'views/scores.html',
+          controller: "ScoreController",
+          css: "css/scores_style.css"
+        }).
         otherwise('/  ', {
             templateUrl: 'views/inicio.html'
         });

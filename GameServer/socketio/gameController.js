@@ -25,7 +25,8 @@ exports = module.exports = function(io){
 
 		/* Create an instance of a Room inside the map */
   		socket.on('create:room', function(room){
-  			manager.createRoom(room);
+  			socket.join(room);
+  			manager.createRoom(room, socket.id);
   		});
 
   		/* Add players (socket) to an instance of a room */
@@ -38,7 +39,7 @@ exports = module.exports = function(io){
 	        manager.addPlayerToRoom(room, socket.id);
 
 	        let players = manager.getRoomPlayers(room);
-	        socket.roomName = room;
+	       	socket.roomName = room;
 			io.sockets.in(room).emit('connected', players);
 	    });
 

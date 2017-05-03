@@ -28,7 +28,8 @@
                     <img src="img/default-avatar.png" alt="" class="circle">
                     <span class="title">{{gameRoom.name}}</span>
                     <p>{{gameRoom.players.length}} of {{gameRoom.maxPlayers}} <br><b>Owner:</b> {{gameRoom.ownerId}}</p>
-                    <a class="secondary-content waves-effect waves-light btn btn-small">Join</a>
+                    <p>{{gameRoom.type}}</p>
+                    <a class="secondary-content waves-effect waves-light btn btn-small" ng-click="joinRoom($index)">Join</a>
                   </li>
                 </ul>
               </div>
