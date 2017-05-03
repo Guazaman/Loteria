@@ -18,47 +18,19 @@
         <div class="card ">
           <div class="card-content">
            <span class="card-title">Available Game Rooms</span>
-            <div class="rooms-list">
-              <ul class="collection">
-               <li class="collection-item avatar">
-                 <img src="img/default-avatar.png" alt="" class="circle">
-                 <span class="title">Game Room 45</span>
-                 <p>4 of 5 <br><b>Owner:</b> Chechare</p>
-                 <a class="secondary-content waves-effect waves-light btn btn-small">Join</a>
-               </li>
-               <!-- Dummy game rooms... -------------------------------------------------------->
+            <div class="rooms-list" ng-repeat = "gameRoom in gameRooms">
+              <div ng-if="gameRoom.status == 'OnGoing'">
+                <ul class="collection">
 
-               <li class="collection-item avatar">
-                 <img src="img/default-avatar.png" alt="" class="circle">
-                 <span class="title">Game Room 69</span>
-                 <p>2 of 5 <br><b>Owner:</b> Guazaman</p>
-                 <a class="secondary-content waves-effect waves-light btn btn-small">Join</a>
-               </li>
-               <li class="collection-item avatar">
-                 <img src="img/default-avatar.png" alt="" class="circle">
-                 <span class="title">Game Room 42</span>
-                 <p>1 of 5 <br><b>Owner:</b> Kimberluka</p>
-                 <a class="secondary-content waves-effect waves-light btn btn-small">Join</a>
-               </li>
-               <li class="collection-item avatar">
-                 <img src="img/default-avatar.png" alt="" class="circle">
-                 <span class="title">Game Room 85</span>
-                 <p>3 of 5 <br><b>Owner:</b> Luna Crecent</p>
-                 <a class="secondary-content waves-effect waves-light btn btn-small">Join</a>
-               </li>
-               <li class="collection-item avatar">
-                 <img src="img/default-avatar.png" alt="" class="circle">
-                 <span class="title">Game Room 33</span>
-                 <p>1 of 5 <br><b>Owner:</b>Cesar</p>
-                 <a class="secondary-content waves-effect waves-light btn btn-small">Join</a>
-               </li>
-               <li class="collection-item avatar">
-                 <img src="img/default-avatar.png" alt="" class="circle">
-                 <span class="title">Game Room 66</span>
-                 <p>3 of 5 <br><b>Owner:</b> NrML</p>
-                 <a class="secondary-content waves-effect waves-light btn btn-small">Join</a>
-               </li>
-             </ul>
+                 <li class="collection-item avatar">
+                   <img src="img/default-avatar.png" alt="" class="circle">
+                   <span class="title">{{gameRoom.name}}</span>
+                   <p>{{gameRoom.players.length}} of {{gameRoom.maxPlayers}} <br><b>Owner:</b> {{gameRoom.ownerId}}</p>
+                   <a class="secondary-content waves-effect waves-light btn btn-small">Join</a>
+                 </li>
+               </ul>
+
+              </div>
             </div>
           </div>
         </div>

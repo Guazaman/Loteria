@@ -3,8 +3,10 @@
 */
 let loteriaGameControllers = angular.module('loteriaGameControllers', ['ngCookies']);
 
-loteriaGameControllers.controller('InicioController', ['$scope',  'header', function($scope, header){
-
+loteriaGameControllers.controller('InicioController', [ '$scope', '$http', '$rootScope', '$cookies', '$cookieStore', '$window', function ($scope, $http, $rootScope, $cookies, $cookieStore, $window){
+  console.log("Solicitando...");
+  console.log("Id: "+ $cookieStore.get('id'));
+  console.log("Name: "+ $cookieStore.get('name'));
 }]);
 
 loteriaGameControllers.controller('ProfileController', ['$scope', '$http', '$rootScope', '$cookies', '$cookieStore', '$window', function ($scope, $http, $rootScope, $cookies, $cookieStore, $window){
@@ -28,14 +30,51 @@ loteriaGameControllers.controller('ProfileController', ['$scope', '$http', '$roo
     // called asynchronously if an error occurs
     // or server returns response with an error status.
     console.log(response);
-    
-  });
 
+  });
+  $scope.logOfController = function() {
+    $cookieStore.remove('id');
+    $cookieStore.remove('name');
+    $window.location.href = '/'
+  }
+
+  $scope.deleteAccountController = function() {
+    var req = {
+      method: 'DELETE',
+      url: 'http://138.197.219.168:8000/Users/' + $cookieStore.get('id')
+    };
+    $http(req).then(function successCallback(response) {
+      // this callback will be called asynchronously
+      // when the response is available
+      $window.location.href = '/'
+
+    }, function errorCallback(response) {
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+      console.log(response);
+
+    });
+  }
 
 }]);
 
-loteriaGameControllers.controller('GameRoomsController', ['$scope',  'header', function($scope, header){
+loteriaGameControllers.controller('GameRoomsController', ['$scope', '$http', '$rootScope', '$cookies', '$cookieStore', '$window', function ($scope, $http, $rootScope, $cookies, $cookieStore, $window){
+  var req = {
+    method: 'GET',
+    url: 'https://5e8d0c8e.ngrok.io/gamerooms'
+  };
 
+  $http(req).then(function successCallback(response) {
+    // this callback will be called asynchronously
+    // when the response is available
+    console.log(response);
+    $scope.gameRooms = response.data;
+  }, function errorCallback(response) {
+    // called asynchronously if an error occurs
+    // or server returns response with an error status.
+    console.log(response);
+
+  });
 }]);
 
 loteriaGameControllers.controller('LoginController', ['$scope', '$http', '$rootScope', '$cookies', '$cookieStore', '$window', function ($scope, $http, $rootScope, $cookies, $cookieStore, $window){
