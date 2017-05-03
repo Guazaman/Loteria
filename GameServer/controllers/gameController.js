@@ -1,7 +1,7 @@
-// previo al juego
 var manager = require("./../socket.js");
-manager.createRoom("Kim");
-manager.createRoom("Leo123");
+//manager.createRoom("Kim", "001");
+
+const FULL = -1;
 
 exports = module.exports = function(io){
 
@@ -11,31 +11,65 @@ exports = module.exports = function(io){
 
 		socket.on('disconnect', function(){
 	 		let room = socket.roomName;
-
 			if(room){
-				manager.removePlayerFromRoom(room);
+				manager.removePlayerFromRoom(room, socket.id);
 				let players = manager.getRoomPlayers(room);
 				io.sockets.in(room).emit('disconnection', players);
 			}
   		});
 
-  		socket.on('createRoom', function(id){
-  			manager.createRoom(id);
+  		socket.on('createRoom', function(room){
+  			manager.createRoom(room);
   		});
 
 	  	socket.on('joinRoom', function(room) {
-	        socket.join(room);
-	        manager.addPlayerToRoom(room);
 
+	        socket.join(room);
+	        manager.addPlayerToRoom(room, socket.id);
+	        console.log(manager);
 	        let players = manager.getRoomPlayers(room);
-	        console.log(players);
 	        socket.roomName = room;
+
 			io.sockets.in(room).emit('connected', players);
 	    });
 
 	  	socket.on('startGame', function(room){
-	  		//
+
+	  		currentGame = manager.startGame(room);
+	  		console.log("juego comenzando!");
+
+	  		for(i in currentGame.roomPlayers){
+	  			io.to(currentGame.roomPlayers[i].userId).emit('emitCard', currentGame.roomPlayers[i].grid);
+	  		}
+
+	  		var interval = setInterval(function() {
+
+	  			if(currentGame.hasCards()){
+	  				let currentCard =  currentGame.drawCard();
+	  				console.log(currentCard);
+	  				io.sockets.in(room).emit('cardDrawing', currentCard);
+	  			}else{
+	  				clearInterval(this);
+	  				io.sockets.in(room).emit('endedGame', 'draw');
+	  			}
+	  		}, 2000);
+
 	  	});
+
+	  	socket.on('proclaimWin', function() {
+	  		let room = socket.roomName;
+			if(room){
+	  			var result = manager.checkPlayer(room, socket.id);
+	  		}
+
+	  		if(result){
+	  			console.log("YEY! GANASTE");
+	  			io.to(socket.id).emit('winner');
+	  			io.sockets.in(room).emit('endedGame', 'player');
+	  		}
+
+	  		console.log(result);
+	    });
 
 	});
 }
