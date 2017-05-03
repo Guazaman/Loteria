@@ -15,10 +15,9 @@
               <th>Country</th>
           </tr>
         </thead>
-        <tbody ng-repeat= "friend in friends">
-
+        <tbody>
           <!--ng repeat would go here-->
-          <tr>
+          <tr ng-repeat= "friend in friends">
             <td>{{friend.name}}</td>
             <td>{{friend.score}}</td>
             <td>{{friend.country}}</td>
@@ -33,13 +32,14 @@
           <tr>
               <th>Username</th>
               <th>Score</th>
+              <th>Country</th>
           </tr>
         </thead>
 
-        <tbody ng-repeat= "world in worlds">
+        <tbody>
 
           <!--ng repeat would go here-->
-          <tr>
+          <tr ng-repeat= "world in worlds">
             <td>{{world.name}}</td>
             <td>{{world.score}}</td>
             <td>{{world.country}}</td>
@@ -58,9 +58,9 @@
           </tr>
         </thead>
 
-        <tbody ng-repeat= "country in countries">
+        <tbody>
           <!--ng repeat would go here-->
-          <tr>
+          <tr ng-repeat= "country in countries">
             <td>{{country.name}}</td>
             <td>{{country.score}}</td>
             <td>{{country.country}}</td>
