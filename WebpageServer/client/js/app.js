@@ -71,6 +71,11 @@
           controller: "WaitingController",
           css: "css/waiting_style.css"
         }).
+        when('/scores',{
+          templateUrl: 'views/scores.html',
+          //controller: "WaitingController",
+          //css: "css/waiting_style.css"
+        }).
         otherwise('/  ', {
             templateUrl: 'views/inicio.html'
         });
