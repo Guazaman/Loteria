@@ -1,0 +1,77 @@
+<section>
+<div class="content" ng-controller = "ScoreController"><h1 class="pink-text white">Top Scores</h1>
+<ul id="tabs-swipe-demo" class="tabs pink-text">
+    <li class="tab col s3"><a class="active" href="#friends">Friends</a></li>
+    <li class="tab col s3"><a href="#country">World</a></li>
+    <li class="tab col s3"><a href="#world">Country</a></li>
+
+  </ul>
+  <div id="friends" class="col s12 white">
+   <table class="bordered" >
+        <thead>
+          <tr>
+              <th>Username</th>
+              <th>Score</th>
+              <th>Country</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!--ng repeat would go here-->
+          <tr ng-repeat= "friend in friends">
+            <td>{{friend.name}}</td>
+            <td>{{friend.score}}</td>
+            <td>{{friend.country}}</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  <div id="country" class="col s12 white">
+   <table class="bordered">
+        <thead>
+          <tr>
+              <th>Username</th>
+              <th>Score</th>
+              <th>Country</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <!--ng repeat would go here-->
+          <tr ng-repeat= "world in worlds">
+            <td>{{world.name}}</td>
+            <td>{{world.score}}</td>
+            <td>{{world.country}}</td>
+          </tr>
+
+        </tbody>
+      </table>
+  </div>
+  <div id="world" class="col s12 white">
+ <table class="bordered">
+        <thead>
+          <tr>
+              <th>Username</th>
+              <th>Score</th>
+              <th>Country</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <!--ng repeat would go here-->
+          <tr ng-repeat= "country in countries">
+            <td>{{country.name}}</td>
+            <td>{{country.score}}</td>
+            <td>{{country.country}}</td>
+          </tr>
+
+        </tbody>
+      </table>
+  </div>
+</div>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $('ul.tabs').tabs();
+  });</script>
+</section>
