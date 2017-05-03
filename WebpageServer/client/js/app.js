@@ -201,7 +201,8 @@
         }).
         when('/login',{
           templateUrl: 'views/login.html',
-          controller: "LoginController"
+          controller: "LoginController",
+          css: "css/login.css"
         }).
         when('/logout',{
           templateUrl: 'views/logout.html',
@@ -209,12 +210,18 @@
         }).
         when('/register',{
           templateUrl: 'views/register.html',
-          controller: "RegisterController"
+          controller: "RegisterController",
+          css: "css/register.css"
         }).
         when('/waiting',{
           templateUrl: 'views/waiting.html',
           controller: "WaitingController",
           css: "css/waiting_style.css"
+        }).
+        when('/gameroom',{
+          templateUrl: 'views/gameroom.html',
+          controller: "GameroomController",
+          css: "css/gameroom.css"
         }).
         otherwise('/  ', {
             templateUrl: 'views/inicio.html'

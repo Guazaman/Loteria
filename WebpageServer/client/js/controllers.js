@@ -297,6 +297,17 @@ loteriaGameControllers.controller('FooterController', ['$scope', '$location', fu
 
 }]);
 
+loteriaGameControllers.controller('GameroomController', ['$scope', '$http', '$rootScope', '$cookies', '$cookieStore', '$window', function ($scope, $http, $rootScope, $cookies, $cookieStore, $window){
+  $scope.cardboard = [
+    [{name:"la campana", clicked:false}, {name:'el alacran', clicked:false}, {name: 'el apache', clicked:false}, {name: 'el arbol', clicked:false}],
+    [{name: 'el arpa', clicked:false}, {name:'el bandolon', clicked:false}, {name: 'el barril', clicked:false}, {name: 'el borracho', clicked:false}],
+    [{name: 'el camaron', clicked:false}, {name: 'el cantarito', clicked:false}, {name: 'el catrin', clicked:false}, {name: 'el cazo', clicked:false}],
+    [{name: 'el corazon', clicked:false}, {name: 'el cotorro', clicked:false}, {name: 'el diablito', clicked:false}, {name: 'el gallo', clicked:false}]
+  ];
+
+
+}]);
+
 loteriaGameControllers.controller('WaitingController', ['$scope',  'header', function($scope, header){
 
 }]);

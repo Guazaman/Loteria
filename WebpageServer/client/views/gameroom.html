@@ -17,59 +17,73 @@
 <body ng-app="app">
 
 
-<h4 style="position:absolute; top: 60px; left:150px"> Current Lottery Cards</h4>
-<section class="container">
+<section>
 
+  <div class="row"></div>
+  <div class="row"></div>
 
-  <div class="row">
-
-        <div class="col s12 m12 l4" style="position:absolute; top: 150px; left:190px; ">
-          <div class="left-align">
-              <div class="col s12 m6 l4" id="CurrentCard"><p> <img src="https://s-media-cache-ak0.pinimg.com/236x/c6/30/22/c63022717d7d93ea6e8e518f0b3f04c5.jpg"/> </p></div>
+    <div class="row">
+      <div class="col s12 m2 l1 xl2 offset-l1 offset-xl1 center-align ">
+        <div class="col s12 m12 l12 card-panel">
+          <h5> Current Card</h5>
+          <img class="responsive-img" src="https://s-media-cache-ak0.pinimg.com/236x/c6/30/22/c63022717d7d93ea6e8e518f0b3f04c5.jpg"/>
+          <div class="progress">
+              <div class="determinate" style="width: 70%"></div>
           </div>
-
         </div>
+      </div>
 
-        <div class="center-align">
-            <div class ="col s12 m12 l6 offset-s3" >
-
-              <div class="row">
-                <div class="col s12 m6 l3"><p> <img src="https://s-media-cache-ak0.pinimg.com/236x/c6/30/22/c63022717d7d93ea6e8e518f0b3f04c5.jpg"/> </p></div>
-                <div class="col s12 m6 l3"><p> <img src="https://s-media-cache-ak0.pinimg.com/236x/c6/30/22/c63022717d7d93ea6e8e518f0b3f04c5.jpg"/> </p></div>
-                <div class="col s12 m6 l3"><p> <img src="https://s-media-cache-ak0.pinimg.com/236x/c6/30/22/c63022717d7d93ea6e8e518f0b3f04c5.jpg"/> </p></div>
-                <div class="col s12 m6 l3"><p> <img src="https://s-media-cache-ak0.pinimg.com/236x/c6/30/22/c63022717d7d93ea6e8e518f0b3f04c5.jpg"/> </p></div>
-              </div>
-              <div class="row">
-                <div class="col s12 m6 l3"><p> <img src="https://s-media-cache-ak0.pinimg.com/236x/c6/30/22/c63022717d7d93ea6e8e518f0b3f04c5.jpg"/> </p></div>
-                <div class="col s12 m6 l3"><p> <img src="https://s-media-cache-ak0.pinimg.com/236x/c6/30/22/c63022717d7d93ea6e8e518f0b3f04c5.jpg"/> </p></div>
-                <div class="col s12 m6 l3"><p> <img src="https://s-media-cache-ak0.pinimg.com/236x/c6/30/22/c63022717d7d93ea6e8e518f0b3f04c5.jpg"/> </p></div>
-                <div class="col s12 m6 l3"><p> <img src="https://s-media-cache-ak0.pinimg.com/236x/c6/30/22/c63022717d7d93ea6e8e518f0b3f04c5.jpg"/> </p></div>
-              </div>
-              <div class="row">
-                <div class="col s12 m6 l3"><p> <img src="https://s-media-cache-ak0.pinimg.com/236x/c6/30/22/c63022717d7d93ea6e8e518f0b3f04c5.jpg"/> </p></div>
-                <div class="col s12 m6 l3"><p> <img src="https://s-media-cache-ak0.pinimg.com/236x/c6/30/22/c63022717d7d93ea6e8e518f0b3f04c5.jpg"/> </p></div>
-                <div class="col s12 m6 l3"><p> <img src="https://s-media-cache-ak0.pinimg.com/236x/c6/30/22/c63022717d7d93ea6e8e518f0b3f04c5.jpg"/> </p></div>
-                <div class="col s12 m6 l3"><p> <img src="https://s-media-cache-ak0.pinimg.com/236x/c6/30/22/c63022717d7d93ea6e8e518f0b3f04c5.jpg"/> </p></div>
-              </div>
-              <div class="row">
-                <div class="col s12 m6 l3"><p> <img src="https://s-media-cache-ak0.pinimg.com/236x/c6/30/22/c63022717d7d93ea6e8e518f0b3f04c5.jpg"/> </p></div>
-                <div class="col s12 m6 l3"><p> <img src="https://s-media-cache-ak0.pinimg.com/236x/c6/30/22/c63022717d7d93ea6e8e518f0b3f04c5.jpg"/> </p></div>
-                <div class="col s12 m6 l3"><p> <img src="https://s-media-cache-ak0.pinimg.com/236x/c6/30/22/c63022717d7d93ea6e8e518f0b3f04c5.jpg"/> </p></div>
-                <div class="col s12 m6 l3"><p> <img src="https://s-media-cache-ak0.pinimg.com/236x/c6/30/22/c63022717d7d93ea6e8e518f0b3f04c5.jpg"/> </p></div>
-              </div>
-
-            </div>
+      <div class ="col s12 m8 l6 xl4 offset-l1 offset-xl1 center-align card" >
+        <div class="card-content cardboard">
+          <span class="card-title">Loteria.io</span>
+          <div class="row">
+            <div class="col s6 m3 l3" ng-click='cardboard[0][0].clicked = !cardboard[0][0].clicked'><img ng-class="{'responsive-img': true, 'clicked-card': cardboard[0][0].clicked}" src="img/cards/{{cardboard[0][0].name}}.jpg"/></div>
+            <div class="col s6 m3 l3"  ng-click='cardboard[0][1].clicked = !cardboard[0][1].clicked'><img ng-class="{'responsive-img': true, 'clicked-card': cardboard[0][1].clicked}" src="img/cards/{{cardboard[0][1].name}}.jpg"/></div>
+            <div class="col s6 m3 l3"  ng-click='cardboard[0][2].clicked = !cardboard[0][2].clicked'><img ng-class="{'responsive-img': true, 'clicked-card': cardboard[0][2].clicked}" src="img/cards/{{cardboard[0][2].name}}.jpg"/></div>
+            <div class="col s6 m3 l3"  ng-click='cardboard[0][3].clicked = !cardboard[0][3].clicked'><img ng-class="{'responsive-img': true, 'clicked-card': cardboard[0][3].clicked}" src="img/cards/{{cardboard[0][3].name}}.jpg"/></div>
           </div>
-
-        <div class ="col s12 m12 l2" style="position:relative; top:190px; right:0px">
-          <div class="valign" >
-            <div class="right-align;">
-              <a class="waves-effect waves-light btn">Lottery!</a>
-            </div>
+          <div class="row">
+            <div class="col s6 m3 l3" ng-click='cardboard[1][0].clicked = !cardboard[1][0].clicked'><img ng-class="{'responsive-img': true, 'clicked-card': cardboard[1][0].clicked}" src="img/cards/{{cardboard[1][0].name}}.jpg"/></div>
+            <div class="col s6 m3 l3" ng-click='cardboard[1][1].clicked = !cardboard[1][1].clicked'><img ng-class="{'responsive-img': true, 'clicked-card': cardboard[1][1].clicked}" src="img/cards/{{cardboard[1][1].name}}.jpg"/></div>
+            <div class="col s6 m3 l3" ng-click='cardboard[1][2].clicked = !cardboard[1][2].clicked'><img ng-class="{'responsive-img': true, 'clicked-card': cardboard[1][2].clicked}" src="img/cards/{{cardboard[1][2].name}}.jpg"/></div>
+            <div class="col s6 m3 l3" ng-click='cardboard[1][3].clicked = !cardboard[1][3].clicked'><img ng-class="{'responsive-img': true, 'clicked-card': cardboard[1][3].clicked}" src="img/cards/{{cardboard[1][3].name}}.jpg"/></div>
+          </div>
+          <div class="row">
+            <div class="col s6 m3 l3" ng-click='cardboard[2][0].clicked = !cardboard[2][0].clicked'><img ng-class="{'responsive-img': true, 'clicked-card': cardboard[2][0].clicked}" src="img/cards/{{cardboard[2][0].name}}.jpg"/></div>
+            <div class="col s6 m3 l3" ng-click='cardboard[2][1].clicked = !cardboard[2][1].clicked'><img ng-class="{'responsive-img': true, 'clicked-card': cardboard[2][1].clicked}" src="img/cards/{{cardboard[2][1].name}}.jpg"/></div>
+            <div class="col s6 m3 l3" ng-click='cardboard[2][2].clicked = !cardboard[2][2].clicked'><img ng-class="{'responsive-img': true, 'clicked-card': cardboard[2][2].clicked}" src="img/cards/{{cardboard[2][2].name}}.jpg"/></div>
+            <div class="col s6 m3 l3" ng-click='cardboard[2][3].clicked = !cardboard[2][3].clicked'><img ng-class="{'responsive-img': true, 'clicked-card': cardboard[2][3].clicked}" src="img/cards/{{cardboard[2][3].name}}.jpg"/></div>
+          </div>
+          <div class="">
+            <div class="col s6 m3 l3" ng-click='cardboard[3][0].clicked = !cardboard[3][0].clicked'><img ng-class="{'responsive-img': true, 'clicked-card': cardboard[3][0].clicked}" src="img/cards/{{cardboard[3][0].name}}.jpg"/></div>
+            <div class="col s6 m3 l3" ng-click='cardboard[3][1].clicked = !cardboard[3][1].clicked'><img ng-class="{'responsive-img': true, 'clicked-card': cardboard[3][1].clicked}" src="img/cards/{{cardboard[3][1].name}}.jpg"/></div>
+            <div class="col s6 m3 l3" ng-click='cardboard[3][2].clicked = !cardboard[3][2].clicked'><img ng-class="{'responsive-img': true, 'clicked-card': cardboard[3][2].clicked}" src="img/cards/{{cardboard[3][2].name}}.jpg"/></div>
+            <div class="col s6 m3 l3" ng-click='cardboard[3][3].clicked = !cardboard[3][3].clicked'><img ng-class="{'responsive-img': true, 'clicked-card': cardboard[3][3].clicked}" src="img/cards/{{cardboard[3][3].name}}.jpg"/></div>
+          </div>
           </div>
         </div>
 
-  </div>
+        <div class ="col s12 m2 l3 xl4 center-align ">
+          <div class="card">
+            <div class="card-content  grey-text tex-darken-4">
+             <span class="card-title">Players</span>
+             <div class="friends-list">
+               <ul class="collection">
+                <li class="collection-item avatar" ng-repeat="friend in friends">
+                    <img src="img/default-avatar.png" alt="" class="circle">
+                    <span class="title">{{player.name}}</span>
+                  </li>
+              </ul>
+             </div>
+            </div>
+          </div>
+
+          <div class="fixed-action-btn">
+            <a href="#" class="btn-big-red">¡Lotería!</a>
+          </div>
+        </div>
+      </div>
+
 
 </section>
 
