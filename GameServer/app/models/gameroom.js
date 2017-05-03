@@ -7,8 +7,9 @@ module.exports = mongoose.model('GameRoom', {
 	name: String,
 	type: { type: String, default: 'public' },	
 	players: [String],
-	createdAt: Date,
+	invited: [String],
+	createdAt: { type: Date, default: Date.now },
 	winner: String,
-	status: String,
-	maxPlayers: { type: Number, max: 5, min: 2 }
+	status: { type: String, default: 'Waiting'},
+	maxPlayers: { type: Number, max: 5, min: 2, default: 2 }
 });

@@ -89,7 +89,9 @@ loteriaGameControllers.controller('ProfileController', ['$scope', '$http', '$roo
     $http(req).then(function successCallback(response) {
       // this callback will be called asynchronously
       // when the response is available
-      $window.location.href = '/'
+      $cookieStore.remove('id');
+      $cookieStore.remove('name');
+      $window.location.href = '/';
 
     }, function errorCallback(response) {
       // called asynchronously if an error occurs
@@ -104,25 +106,44 @@ loteriaGameControllers.controller('ProfileController', ['$scope', '$http', '$roo
 loteriaGameControllers.controller('GameRoomsController', ['$scope', '$http', '$rootScope', '$cookies', '$cookieStore', '$window', function ($scope, $http, $rootScope, $cookies, $cookieStore, $window){
   var req = {
     method: 'GET',
-    url: 'https://5e8d0c8e.ngrok.io/gamerooms'
+    url: 'http://b4ee01aa.ngrok.io/gamerooms'
   };
 
   $scope.values = [2,3,4,5];
+  $scope.selectedFriends = [];
+  $scope.gameRoomType = 'public';
+  $scope.statusPage = 200;
+  //Hardcoded variable for testing
+  //$scope.friends = ["Cesar", "Jenny", "Kimberluka", "Noel", "Ari"];
 
   var today = new Date();
+    var loading = {
+      method: 'GET',
+      url: 'http://138.197.219.168:8000/Users/' + $cookieStore.get('id') +'/Friends',
+    };
+    $http(loading).then(function successCallback(response) {
+      // this callback will be called asynchronously
+      // when the response is available
+      $scope.friends = response.data;
+      console.log($scope.friends);
+    }, function errorCallback(response) {
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+      console.log(response);
+
+    });
 
   $scope.createNewGameController = function(){
     var newGameRoom = {
       method: 'POST',
-      url: 'https://5e8d0c8e.ngrok.io/gamerooms',
+      url: 'http://b4ee01aa.ngrok.io/gamerooms',
       data: { ownerId: $cookieStore.get('id'),
               name: $scope.gameRoomName,
-              createdAt: today,
               maxPlayers: $scope.gameRoomMaxPlayers ,
               status: 'Waiting',
               type: $scope.gameRoomType,
-              players: [$cookieStore.get('name')]
-
+              players:  $cookieStore.get('name'),
+              invited: $scope.selectedFriends
       }
     };
     $http(newGameRoom).then(function successCallback(response) {
@@ -141,10 +162,15 @@ loteriaGameControllers.controller('GameRoomsController', ['$scope', '$http', '$r
     // when the response is available
     console.log(response);
     $scope.gameRooms = response.data;
+    //Un-comment this line for production
+    //loadFriends();
+
   }, function errorCallback(response) {
     // called asynchronously if an error occurs
     // or server returns response with an error status.
     console.log(response);
+    $scope.statusPage = 404;
+
   },
 
   $scope.newGameRoomController = function() {
@@ -152,9 +178,7 @@ loteriaGameControllers.controller('GameRoomsController', ['$scope', '$http', '$r
     $cookieStore.remove('id');
     $cookieStore.remove('name');
     $window.location.href = '/'
-  }
-
-);
+  });
 }]);
 
 loteriaGameControllers.controller('LoginController', ['$scope', '$http', '$rootScope', '$cookies', '$cookieStore', '$window', function ($scope, $http, $rootScope, $cookies, $cookieStore, $window){
@@ -185,12 +209,17 @@ loteriaGameControllers.controller('LoginController', ['$scope', '$http', '$rootS
       // called asynchronously if an error occurs
       // or server returns response with an error status.
       console.log(response);
+      $scope.loginError = true;
 
     });
   }
 }]);
 
-
+loteriaGameControllers.controller('LogoutController', ['$scope', '$http', '$rootScope', '$cookies', '$cookieStore', '$window', function ($scope, $http, $rootScope, $cookies, $cookieStore, $window){
+    $cookieStore.remove('id');
+    $cookieStore.remove('name');
+    $window.location.href = '/';
+}]);
 
 loteriaGameControllers.controller('RegisterController',  ['$scope', '$http', '$rootScope', '$cookies', '$cookieStore', '$window', function ($scope, $http, $rootScope, $cookies, $cookieStore, $window){
   $scope.registerController = function() {
@@ -232,14 +261,41 @@ loteriaGameControllers.controller('RegisterController',  ['$scope', '$http', '$r
   }
 }]);
 
-loteriaGameControllers.controller('HeadController', ['$scope','$cookies', '$cookieStore', function($scope, $cookies, $cookieStore){
+loteriaGameControllers.controller('HeadController', ['$scope','$cookies', '$cookieStore', '$location', function($scope, $cookies, $cookieStore, $location){
   $scope.logged = false;
+  var view = $location.path();
+  $scope.showNavbar = true;
+
 
   if($cookieStore.get('id')){
       $scope.logged = true;
       console.log("The user is logged");
   }else{
     console.log("The user is NOT logged");
+  }
+
+
+  if(view === '/waiting'){
+    $scope.showNavbar = false;
+    console.log("waiting location");
+  }
+
+  if(view === '/gameroom'){
+    $scope.showNavbar = false;
+  }
+
+}]);
+
+loteriaGameControllers.controller('FooterController', ['$scope', '$location', function($scope, $location){
+  var view = $location.path();
+  $scope.showFooter = true;
+
+  if(view === '/waiting'){
+    $scope.showFooter = false;
+  }
+
+  if(view === '/gameroom'){
+    $scope.showFooter = false;
   }
 
 }]);

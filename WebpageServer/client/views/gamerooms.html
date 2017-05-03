@@ -18,10 +18,12 @@
         <div class="card ">
           <div class="card-content">
             <span class="card-title">Available Game Rooms</span>
+            <div class="center-align yellow-text" ng-show='statusPage==404'>
+              <i class="material-icons large">warning</i>  <h3>   Sorry, there are not Gamerooms available for the moment. :( </h3>
+            </div>
             <div class="rooms-list" ng-repeat = "gameRoom in gameRooms">
               <div ng-if="gameRoom.status == 'Waiting'">
                 <ul class="collection">
-
                   <li class="collection-item avatar">
                     <img src="img/default-avatar.png" alt="" class="circle">
                     <span class="title">{{gameRoom.name}}</span>
@@ -29,7 +31,6 @@
                     <a class="secondary-content waves-effect waves-light btn btn-small">Join</a>
                   </li>
                 </ul>
-
               </div>
             </div>
           </div>
@@ -40,52 +41,51 @@
 </section>
 
 <!-- Modal Structure -->
-<div id="modalRoom" class="modal" style="height: 600px;">
+<div id="modalRoom" class="modal">
   <div class="modal-content">
     <h4>New GameRoom</h4>
-    <div class="input-field col s12" style="width: 200px; float:left; ">
-      <input placeholder="Game ID" id="game_id" type="text" class="validate" ng-model="gameRoomName">
-      <label for="game_id"> </label>
 
-      <div class="row">
-        <div class="input-field col s12" style="width: 300px">
-          <select>
-            <option value="" disabled selected >Max # of players</option>
-            <option value="1">1 player</option>
-            <option value="2">2 players</option>
-            <option value="3">3 players</option>
-            <option value="4">4 players</option>
-            <option value="5">5 players</option>
-          </select>
-        </div>
-        <form action="#">
-          <p>
-            <input name="group1" type="radio" id="test1" ng-model="gameRoomType" />
-            <label for="test1">Private</label>
-            <input name="group1" type="radio" id="test2" ng-model="gameRoomType"/>
-            <label for="test2">Public</label>
-          </p>
-          <div input-field>
-            <select class="" ng-model="gameRoomMaxPlayers" material-select watch>
+    <div class="row">
+      <form class="" action="#">
+        <div class="col s12 m6 l6">
+          <div class="input-field col s12 m12 l12">
+            <input id="game_id" type="text" class="validate" ng-model="gameRoomName" required>
+            <label for="game_id"> Room Name</label>
+          </div>
+
+          <div class="col s12 m12 l12" material-select watch>
+            <label for="numberPlayers">Number of players</label>
+            <select id="numberPlayers" class="" ng-model="gameRoomMaxPlayers" material-select watch>
               <option ng-repeat="value in values">{{value}}</option>
             </select>
           </div>
-        </form>
-      </div>
+          <div class="col s12 m12 l12 center-align">
+            <p>
+              <input name="group1" type="radio" id="test1" ng-model="gameRoomType" value="private"/>
+              <label for="test1">Private</label>
+              <input name="group1" type="radio" id="test2" ng-model="gameRoomType" value="public"/>
+              <label for="test2">Public</label>
+            </p>
+          </div>
+        </div>
+
+        <div class="col s12 m6 l6">
+          <ul class="collection with-header friend-list-select" ng-hide="gameRoomType == 'public'">
+            <li class="collection-header"><h6>Invite friends</h6></li>
+            <li class="collection-item" ng-repeat="friend in friends">
+              <p>
+                <input type="checkbox" id="c-{{friend.name}}" checklist-model="selectedFriends" checklist-value="friend.name"/>
+                <label for="c-{{friend.name}}">{{friend.name}}</label>
+              </p>
+            </li>
+          </ul>
+        </div>
+      </form>
     </div>
-    <div class="input-field col s12" style="width: 200px; float:left; margin-left:200px">
-      <row>
-        <ul class="collection with-header" style="width: 250px; float:left;">
-          <a class="btn-floating btn-large waves-effect waves-light red" style="float:right;x"><i class="material-icons">+</i></a>
-          <li class="collection-header"><h4>Players</h4></li>
-          <li class="collection-item">Friend 1</li>
-          <li class="collection-item">Friend 2</li>
-          <li class="collection-item">Friend 3</li>
-          <li class="collection-item">Friend 4</li>
-          <li class="collection-item">Friend 5</li>
-        </ul>
-        <a class="waves-effect waves-light btn" ng-click = "createNewGameController()">Create game</a>
-      </row>
+
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+      <a class="waves-effect waves-light btn" ng-click = "createNewGameController()">Create game</a>
     </div>
   </div>
 </div>
