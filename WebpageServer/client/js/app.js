@@ -62,6 +62,10 @@
           templateUrl: 'views/login.html',
           controller: "LoginController"
         }).
+        when('/logout',{
+          templateUrl: 'views/logout.html',
+          controller: "LogoutController"
+        }).
         when('/register',{
           templateUrl: 'views/register.html',
           controller: "RegisterController"

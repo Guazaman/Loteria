@@ -33,6 +33,7 @@ module.exports = function(app){
 			name: req.body.name, 
 			type: req.body.type, 	
 			players: req.body.players, 
+            invited: req.body.invited,
 			createdAt: req.body.createdAt, 
 			winner: req.body.winner, 
 			maxPlayers: req.body.maxPlayers,

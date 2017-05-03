@@ -87,7 +87,9 @@ loteriaGameControllers.controller('ProfileController', ['$scope', '$http', '$roo
     $http(req).then(function successCallback(response) {
       // this callback will be called asynchronously
       // when the response is available
-      $window.location.href = '/'
+      $cookieStore.remove('id');
+      $cookieStore.remove('name');
+      $window.location.href = '/';
 
     }, function errorCallback(response) {
       // called asynchronously if an error occurs
@@ -182,12 +184,17 @@ loteriaGameControllers.controller('LoginController', ['$scope', '$http', '$rootS
       // called asynchronously if an error occurs
       // or server returns response with an error status.
       console.log(response);
+      $scope.loginError = true;
 
     });
   }
 }]);
 
-
+loteriaGameControllers.controller('LogoutController', ['$scope', '$http', '$rootScope', '$cookies', '$cookieStore', '$window', function ($scope, $http, $rootScope, $cookies, $cookieStore, $window){
+    $cookieStore.remove('id');
+    $cookieStore.remove('name');
+    $window.location.href = '/';
+}]);
 
 loteriaGameControllers.controller('RegisterController',  ['$scope', '$http', '$rootScope', '$cookies', '$cookieStore', '$window', function ($scope, $http, $rootScope, $cookies, $cookieStore, $window){
   $scope.registerController = function() {
@@ -229,14 +236,41 @@ loteriaGameControllers.controller('RegisterController',  ['$scope', '$http', '$r
   }
 }]);
 
-loteriaGameControllers.controller('HeadController', ['$scope','$cookies', '$cookieStore', function($scope, $cookies, $cookieStore){
+loteriaGameControllers.controller('HeadController', ['$scope','$cookies', '$cookieStore', '$location', function($scope, $cookies, $cookieStore, $location){
   $scope.logged = false;
+  var view = $location.path();
+  $scope.showNavbar = true;
+
 
   if($cookieStore.get('id')){
       $scope.logged = true;
       console.log("The user is logged");
   }else{
     console.log("The user is NOT logged");
+  }
+
+
+  if(view === '/waiting'){
+    $scope.showNavbar = false;
+    console.log("waiting location");
+  }
+
+  if(view === '/gameroom'){
+    $scope.showNavbar = false;
+  }
+
+}]);
+
+loteriaGameControllers.controller('FooterController', ['$scope', '$location', function($scope, $location){
+  var view = $location.path();
+  $scope.showFooter = true;
+
+  if(view === '/waiting'){
+    $scope.showFooter = false;
+  }
+
+  if(view === '/gameroom'){
+    $scope.showFooter = false;
   }
 
 }]);
