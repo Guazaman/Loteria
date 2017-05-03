@@ -56,7 +56,7 @@
           <div class="col s12 m12 l12" material-select watch>
             <label for="numberPlayers">Number of players</label>
             <select id="numberPlayers" class="" ng-model="gameRoomMaxPlayers" material-select watch>
-              <option ng-repeat="value in values">{{value}} players</option>
+              <option ng-repeat="value in values">{{value}}</option>
             </select>
           </div>
           <div class="col s12 m12 l12 center-align">
@@ -74,8 +74,8 @@
             <li class="collection-header"><h6>Invite friends</h6></li>
             <li class="collection-item" ng-repeat="friend in friends">
               <p>
-                <input type="checkbox" id="c-{{friend}}" checklist-model="selectedFriends" checklist-value="friend"/>
-                <label for="c-{{friend}}">{{friend}}</label>
+                <input type="checkbox" id="c-{{friend.name}}" checklist-model="selectedFriends" checklist-value="friend.name"/>
+                <label for="c-{{friend.name}}">{{friend.name}}</label>
               </p>
             </li>
           </ul>
