@@ -1,0 +1,23 @@
+.header-logo{
+  width: 20%;
+  height: auto;
+}
+
+.header-section, .header-section i{
+  height: 40px !important;
+  line-height: 40px !important;
+}
+
+.header-section > i{
+
+}
+
+.view-div{
+  min-height: 95vh;
+}
+
+.btn-small{
+  height: 28px !important;
+  line-height: 30px !important;
+  padding: 0px 1rem !important;
+}

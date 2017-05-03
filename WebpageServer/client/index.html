@@ -1,37 +1,46 @@
 <!DOCTYPE html>
-<html lang="es" ng-app="equipo6">
+<html lang="es" ng-app="loteriaGame">
 <head>
     <meta charset="UTF-8">
-    <title>Loteria.io</title>
-    <link href="/css/style.css" rel="stylesheet">
-    <link href="/css/libs/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/libs/font-awesome.min.css" rel="stylesheet">
-    <!-- AngularJS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular.min.js"></script>
-    <script src="https://code.angularjs.org/1.6.1/angular-route.min.js"></script>
-    <script src="https://code.angularjs.org/1.6.1/angular-sanitize.min.js"></script>
-    <!-- Materialize Framework -->
+    <title>loteriaGame.io</title>
+    <!-- Styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
+    <link href="/css/libs/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/profile.css" rel="stylesheet">
+    <link href="/css/gamerooms.css" rel="stylesheet">
+    <link href="/css/waiting_style.css" rel="stylesheet">
+    <link href="/css/lp_style.css" rel="stylesheet">
+
+    <!-- Materialize Framework -->
     <!-- JavaScript for: jQuery, angular, materialize, and angular-materialize. All of which are needed. -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.2.2/angular-materialize.min.js"></script>
+
+    <!-- AngularJS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular-route.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular-sanitize.min.js"></script>
 
     <!-- AngularFire -->
     <script src="https://cdn.firebase.com/libs/angularfire/2.2.0/angularfire.min.js"></script>
     <script src="/js/app.js"></script>
     <script src="/js/controllers.js"></script>
+    <script src="/js/landingPageinit.js"></script>
     <base href="/" />
+
+    <script src = "https://code.angularjs.org/1.6.1/angular-cookies.min.js"></script>
+
 </head>
 <body>
 
-<header ng-include src = "'components/header.html'"></header>
+<header ng-include src = "'components/header.html'" ng-controller="HeadController"></header>
 
-<div ng-view ></div>
+<div ng-view class="view-div" ></div>
 
 <footer ng-include src="'components/footer.html'"></footer>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-<script src="/js/libs/bootstrap.min.js"></script>
 </body>
 </html>

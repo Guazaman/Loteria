@@ -1,0 +1,132 @@
+<nav class="header-section">
+   <div class="nav-wrapper grey darken-3">
+     <a href="#!" class="brand-logo"><i class="material-icons left">account_circle</i>Profile</a>
+     <ul class="right hide-on-med-and-down">
+     </ul>
+   </div>
+ </nav>
+
+<section ng-controller = "ProfileController">
+  <div class="row">
+    <div class="col s12 m4 l2">
+
+      <div class="card profile-information">
+              <div class="card-image">
+                <img src="img/default-avatar.png">
+                <span class="card-title" >{{profileName}}</span>
+                <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add_a_photo</i></a>
+              </div>
+              <div class="card-content center-align  grey-text tex-darken-4 games-card">
+                <p>Country</p>
+                <img class="responsive-img" src="img/mexico-flag.jpg" alt="Country Flag">
+
+                <h5><i class="material-icons">stars</i><br>Points: {{profileScore}}</h5>
+
+                  <a class="waves-effect waves-light btn " ng-click="logOfController()">Log off</a>
+                  <div class="row"></div>
+                  <a class="waves-effect waves-light btn red darken-4" ng-click="deleteAccountController()">Delete Account</a>
+              </div>
+
+      </div>
+    </div>
+
+      <div class="col s12 m8 l10 ">
+        <div class="col s12 m12 l6">
+          <div class="card ">
+            <div class="card-content  grey-text tex-darken-4 games-card">
+             <span class="card-title">Game Invitations</span>
+              <div class="rooms-list">
+                <ul class="collection">
+                 <li class="collection-item avatar">
+                   <img src="img/default-avatar.png" alt="" class="circle">
+                   <span class="title">Game Room 45</span>
+                   <p>4 of 5 <br><b>Owner:</b> Chechare</p>
+                   <a class="secondary-content waves-effect waves-light btn btn-small">Join</a>
+                 </li>
+                 <!-- Dummy game rooms... -------------------------------------------------------->
+
+                 <li class="collection-item avatar">
+                   <img src="img/default-avatar.png" alt="" class="circle">
+                   <span class="title">Game Room 69</span>
+                   <p>2 of 5 <br><b>Owner:</b> Guazaman</p>
+                   <a class="secondary-content waves-effect waves-light btn btn-small">Join</a>
+                 </li>
+                 <li class="collection-item avatar">
+                   <img src="img/default-avatar.png" alt="" class="circle">
+                   <span class="title">Game Room 42</span>
+                   <p>1 of 5 <br><b>Owner:</b> Kimberluka</p>
+                   <a class="secondary-content waves-effect waves-light btn btn-small">Join</a>
+                 </li>
+                 <li class="collection-item avatar">
+                   <img src="img/default-avatar.png" alt="" class="circle">
+                   <span class="title">Game Room 85</span>
+                   <p>3 of 5 <br><b>Owner:</b> Luna Crecent</p>
+                   <a class="secondary-content waves-effect waves-light btn btn-small">Join</a>
+                 </li>
+                 <li class="collection-item avatar">
+                   <img src="img/default-avatar.png" alt="" class="circle">
+                   <span class="title">Game Room 33</span>
+                   <p>1 of 5 <br><b>Owner:</b>Cesar</p>
+                   <a class="secondary-content waves-effect waves-light btn btn-small">Join</a>
+                 </li>
+                 <li class="collection-item avatar">
+                   <img src="img/default-avatar.png" alt="" class="circle">
+                   <span class="title">Game Room 66</span>
+                   <p>3 of 5 <br><b>Owner:</b> NrML</p>
+                   <a class="secondary-content waves-effect waves-light btn btn-small">Join</a>
+                 </li>
+               </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="col s12 m12 l12 center-align">
+            <div class="col s6 m6 l6">
+              <a class="waves-effect waves-light btn"><i class="material-icons left">stars</i>Scores</a>
+            </div>
+            <div class="col s6 m6 l6">
+              <a class="waves-effect waves-light btn" href="/gamerooms"><i class="material-icons left">games</i>Game rooms</a>
+            </div>
+          </div>
+        </div>
+        <div class="col s12 m12 l6">
+          <div class="card">
+            <div class="card-content  grey-text tex-darken-4">
+             <span class="card-title">Add Friend</span>
+
+             <div class="input-field rigth ">
+                 <input id="email" type="email" class="validate" ng-model = "addEmail">
+                 <label for="email">Email</label>
+             </div>
+             <div class="right-align">
+               <a class="waves-effect waves-light btn" ng-click ="addFriends()"><i class="material-icons left">add</i>Add Friend</a>
+             </div>
+
+            </div>
+
+
+          </div>
+          <div class="card">
+            <div class="card-content  grey-text tex-darken-4">
+             <span class="card-title">Friends</span>
+             <div class="friends-list">
+               <ul class="collection">
+
+
+                  <li class="collection-item avatar" ng-repeat="friend in friends">
+                    <img src="img/default-avatar.png" alt="" class="circle">
+                    <span class="title">{{friend.name}}</span>
+                    <p>Online</p>
+                  </li>
+
+              </ul>
+             </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+
+  </div>
+</section>
