@@ -65,6 +65,8 @@ loteriaGameControllers.controller('ProfileController', ['$scope', '$http', '$roo
     $scope.profileEmail = response.data.email;
     $scope.profileName = response.data.name;
     $scope.profileScore = response.data.score;
+    $cookieStore.put('country',   $scope.profileCountry);
+    console.log("PAIS: " + $scope.profileCountry);
     loadFriends();
 
   }, function errorCallback(response) {
@@ -200,6 +202,7 @@ loteriaGameControllers.controller('LoginController', ['$scope', '$http', '$rootS
       console.log("Name:" +response.data.id);
       $cookieStore.put('id', response.data.id);
       $cookieStore.put('name', response.data.name);
+
       $window.location.href = '/profile'
 
     }, function errorCallback(response) {
@@ -298,5 +301,58 @@ loteriaGameControllers.controller('FooterController', ['$scope', '$location', fu
 }]);
 
 loteriaGameControllers.controller('WaitingController', ['$scope',  'header', function($scope, header){
+
+}]);
+
+loteriaGameControllers.controller('ScoreController', ['$scope', '$http', '$rootScope', '$cookies', '$cookieStore', '$window', function ($scope, $http, $rootScope, $cookies, $cookieStore, $window){
+  console.log($cookieStore.get('country'));
+  $scope.countryCompare = $cookieStore.get('country');
+    var loadingFriends = {
+      method: 'GET',
+      url: 'http://138.197.219.168:8000/Users/' + $cookieStore.get('id') +'/Friends',
+    };
+    $http(loadingFriends).then(function successCallback(response) {
+      // this callback will be called asynchronously
+      // when the response is available
+      $scope.friends = response.data;
+
+    }, function errorCallback(response) {
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+      console.log(response);
+
+    });
+
+    var loadingWorld = {
+      method: 'GET',
+      url: 'http://138.197.219.168:8000/Scores/Global',
+    };
+    $http(loadingWorld).then(function successCallback(response) {
+      // this callback will be called asynchronously
+      // when the response is available
+      $scope.worlds = response.data;
+
+    }, function errorCallback(response) {
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+      console.log(response);
+
+    });
+
+    var loadingCountry = {
+      method: 'GET',
+      url: 'http://138.197.219.168:8000/Scores/' + $scope.countryCompare + '/Country',
+    };
+    $http(loadingCountry).then(function successCallback(response) {
+      // this callback will be called asynchronously
+      // when the response is available
+      $scope.countries = response.data;
+
+    }, function errorCallback(response) {
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+      console.log(response);
+
+    });
 
 }]);
