@@ -10,7 +10,6 @@ mongoose.connect(dbURL);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-
 app.use(function(req, res, next){
 
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -21,9 +20,8 @@ app.use(function(req, res, next){
     next();
 });
 
-
 app.use('/Users', require('./app/router/user'));
-app.use('/Scores', require('./app/router/score'))
+app.use('/Scores', require('./app/router/score'));
 
 var port = process.env.PORT || 8000;
 app.listen(port);
