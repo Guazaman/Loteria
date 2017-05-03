@@ -154,3 +154,15 @@ loteriaGameControllers.controller('RegisterController',  ['$scope', '$http', '$r
 loteriaGameControllers.controller('WaitingController', ['$scope',  'header', function($scope, header){
 
 }]);
+
+loteriaGameControllers.controller('HeaderController', ['$scope', 'header',  '$cookies', '$cookieStore', function($scope, header, $cookies, $cookieStore){
+  $scope.logged = false;
+
+  if($cookieStore.get('id')){
+      $scope.logged = true;
+      console.log("The user is logged");
+  }else{
+    console.log("The user is NOT logged");
+  }
+
+}]);
