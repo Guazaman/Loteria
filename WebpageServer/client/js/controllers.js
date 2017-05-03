@@ -188,11 +188,7 @@ loteriaGameControllers.controller('RegisterController',  ['$scope', '$http', '$r
   }
 }]);
 
-loteriaGameControllers.controller('WaitingController', ['$scope',  'header', function($scope, header){
-
-}]);
-
-loteriaGameControllers.controller('HeaderController', ['$scope', 'header',  '$cookies', '$cookieStore', function($scope, header, $cookies, $cookieStore){
+loteriaGameControllers.controller('HeadController', ['$scope','$cookies', '$cookieStore', function($scope, $cookies, $cookieStore){
   $scope.logged = false;
 
   if($cookieStore.get('id')){
@@ -201,5 +197,9 @@ loteriaGameControllers.controller('HeaderController', ['$scope', 'header',  '$co
   }else{
     console.log("The user is NOT logged");
   }
+
+}]);
+
+loteriaGameControllers.controller('WaitingController', ['$scope',  'header', function($scope, header){
 
 }]);
