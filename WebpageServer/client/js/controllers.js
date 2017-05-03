@@ -236,14 +236,41 @@ loteriaGameControllers.controller('RegisterController',  ['$scope', '$http', '$r
   }
 }]);
 
-loteriaGameControllers.controller('HeadController', ['$scope','$cookies', '$cookieStore', function($scope, $cookies, $cookieStore){
+loteriaGameControllers.controller('HeadController', ['$scope','$cookies', '$cookieStore', '$location', function($scope, $cookies, $cookieStore, $location){
   $scope.logged = false;
+  var view = $location.path();
+  $scope.showNavbar = true;
+
 
   if($cookieStore.get('id')){
       $scope.logged = true;
       console.log("The user is logged");
   }else{
     console.log("The user is NOT logged");
+  }
+
+
+  if(view === '/waiting'){
+    $scope.showNavbar = false;
+    console.log("waiting location");
+  }
+
+  if(view === '/gameroom'){
+    $scope.showNavbar = false;
+  }
+
+}]);
+
+loteriaGameControllers.controller('FooterController', ['$scope', '$location', function($scope, $location){
+  var view = $location.path();
+  $scope.showFooter = true;
+
+  if(view === '/waiting'){
+    $scope.showFooter = false;
+  }
+
+  if(view === '/gameroom'){
+    $scope.showFooter = false;
   }
 
 }]);
