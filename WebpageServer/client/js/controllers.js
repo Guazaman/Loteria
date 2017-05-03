@@ -132,7 +132,6 @@ loteriaGameControllers.controller('GameRoomsController', ['$scope', '$http', '$r
     });
 
   $scope.createNewGameController = function(){
-     $scope.selectedFriends.push($cookieStore.get('name'));
     var newGameRoom = {
       method: 'POST',
       url: 'http://b4ee01aa.ngrok.io/gamerooms',
@@ -141,7 +140,8 @@ loteriaGameControllers.controller('GameRoomsController', ['$scope', '$http', '$r
               maxPlayers: $scope.gameRoomMaxPlayers ,
               status: 'Waiting',
               type: $scope.gameRoomType,
-              players:  $scope.selectedFriends
+              players:  $cookieStore.get('name'),
+              invited: $scope.selectedFriends
       }
     };
     $http(newGameRoom).then(function successCallback(response) {
