@@ -17,6 +17,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.json({ type: 'application/vnd.api+json' })); 
 app.use(methodOverride());										// Use of methodoverride to use DELETE instead of PUT
 
+app.use(function(req, res, next){
+
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, content-type, Accept');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    
+    next();
+});
+
 // Routes API, load them to be used by Express.
 require('./app/router/GameRoom/controller.js')(app);
 

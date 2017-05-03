@@ -35,7 +35,8 @@ module.exports = function(app){
 			players: req.body.players, 
 			createdAt: req.body.createdAt, 
 			winner: req.body.winner, 
-			maxPlayers: req.body.maxPlayers
+			maxPlayers: req.body.maxPlayers,
+            status: req.body.status
         }, function(err, gameroom) {
             if (err){
                 console.log(err);
