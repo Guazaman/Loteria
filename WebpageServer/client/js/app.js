@@ -74,7 +74,7 @@
         when('/scores',{
           templateUrl: 'views/scores.html',
           //controller: "WaitingController",
-          //css: "css/waiting_style.css"
+          css: "css/scores_style.css"
         }).
         otherwise('/  ', {
             templateUrl: 'views/inicio.html'
