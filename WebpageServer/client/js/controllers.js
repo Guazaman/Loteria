@@ -18,6 +18,24 @@ loteriaGameControllers.controller('ProfileController', ['$scope', '$http', '$roo
     url: 'http://138.197.219.168:8000/Users/' + $cookieStore.get('id') +'/Profile',
   };
 
+   var loadFriends = function(){
+    var loading = {
+      method: 'GET',
+      url: 'http://138.197.219.168:8000/Users/' + $cookieStore.get('id') +'/Friends',
+    };
+    $http(loading).then(function successCallback(response) {
+      // this callback will be called asynchronously
+      // when the response is available
+      $scope.friends = response.data;
+
+    }, function errorCallback(response) {
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+      console.log(response);
+
+    });
+  }
+
   $http(req).then(function successCallback(response) {
     // this callback will be called asynchronously
     // when the response is available
@@ -26,6 +44,8 @@ loteriaGameControllers.controller('ProfileController', ['$scope', '$http', '$roo
     $scope.profileEmail = response.data.email;
     $scope.profileName = response.data.name;
     $scope.profileScore = response.data.score;
+    loadFriends();
+
   }, function errorCallback(response) {
     // called asynchronously if an error occurs
     // or server returns response with an error status.
