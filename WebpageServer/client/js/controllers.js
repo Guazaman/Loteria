@@ -2,11 +2,11 @@
 * Created by Raptor on 13/06/16.
 */
 let loteriaGameControllers = angular.module('loteriaGameControllers', ['ngCookies']);
-var socket = io.connect('http://fd4e12aa.ngrok.io');
+var socket = io.connect('http://e8e7678d.ngrok.io');
 
 socket.on('connected', function(num){
-      console.log("se conencto a ", num);
-      $scope.currentPlayers = num;
+  console.log("se conencto a ", num);
+  $scope.currentPlayers = num;
 });
 
 loteriaGameControllers.controller('InicioController', [ '$scope', '$http', '$rootScope', '$cookies', '$cookieStore', '$window', function ($scope, $http, $rootScope, $cookies, $cookieStore, $window){
@@ -31,13 +31,11 @@ loteriaGameControllers.controller('ProfileController', ['$scope', '$http', '$roo
       url: 'http://138.197.219.168:8000/Users/' + $cookieStore.get('id') +'/Friends',
     };
     $http(loading).then(function successCallback(response) {
-      // this callback will be called asynchronously
-      // when the response is available
-      $scope.friends = response.data;
+                  $scope.friends = response.data;
 
     }, function errorCallback(response) {
-      // called asynchronously if an error occurs
-      // or server returns response with an error status.
+
+
       console.log(response);
 
     });
@@ -52,22 +50,18 @@ loteriaGameControllers.controller('ProfileController', ['$scope', '$http', '$roo
       },
     };
     $http(agregar).then(function successCallback(response) {
-      // this callback will be called asynchronously
-      // when the response is available
-      console.log(response);
+                  console.log(response);
       $scope.friends.push(response.data);
     }, function errorCallback(response) {
-      // called asynchronously if an error occurs
-      // or server returns response with an error status.
+
+
       console.log(response);
 
     });
   }
 
   $http(req).then(function successCallback(response) {
-    // this callback will be called asynchronously
-    // when the response is available
-    $scope.profileBoardGame = response.data.boardgame;
+            $scope.profileBoardGame = response.data.boardgame;
     $scope.profileCountry = response.data.country;
     $scope.profileEmail = response.data.email;
     $scope.profileName = response.data.name;
@@ -77,8 +71,8 @@ loteriaGameControllers.controller('ProfileController', ['$scope', '$http', '$roo
     loadFriends();
 
   }, function errorCallback(response) {
-    // called asynchronously if an error occurs
-    // or server returns response with an error status.
+
+
     console.log(response);
 
   });
@@ -94,15 +88,13 @@ loteriaGameControllers.controller('ProfileController', ['$scope', '$http', '$roo
       url: 'http://138.197.219.168:8000/Users/' + $cookieStore.get('id')
     };
     $http(req).then(function successCallback(response) {
-      // this callback will be called asynchronously
-      // when the response is available
-      $cookieStore.remove('id');
+                  $cookieStore.remove('id');
       $cookieStore.remove('name');
       $window.location.href = '/';
 
     }, function errorCallback(response) {
-      // called asynchronously if an error occurs
-      // or server returns response with an error status.
+
+
       console.log(response);
 
     });
@@ -113,7 +105,7 @@ loteriaGameControllers.controller('ProfileController', ['$scope', '$http', '$roo
 loteriaGameControllers.controller('GameRoomsController', ['$scope', '$http', '$rootScope', '$cookies', '$cookieStore', '$window', function ($scope, $http, $rootScope, $cookies, $cookieStore, $window){
   var req = {
     method: 'GET',
-    url: 'http://b4ee01aa.ngrok.io/gamerooms'
+    url: 'http://e8e7678d.ngrok.io/gamerooms'
   };
 
 
@@ -127,88 +119,84 @@ loteriaGameControllers.controller('GameRoomsController', ['$scope', '$http', '$r
   //$scope.friends = ["Cesar", "Jenny", "Kimberluka", "Noel", "Ari"];
 
   var today = new Date();
-    var loading = {
-      method: 'GET',
-      url: 'http://138.197.219.168:8000/Users/' + $cookieStore.get('id') +'/Friends',
-    };
-    $http(loading).then(function successCallback(response) {
-      // this callback will be called asynchronously
-      // when the response is available
-      $scope.friends = response.data;
-      console.log($scope.friends);
-    }, function errorCallback(response) {
-      // called asynchronously if an error occurs
-      // or server returns response with an error status.
-      console.log(response);
+  var loading = {
+    method: 'GET',
+    url: 'http://138.197.219.168:8000/Users/' + $cookieStore.get('id') +'/Friends',
+  };
+  $http(loading).then(function successCallback(response) {
+            $scope.friends = response.data;
+    console.log($scope.friends);
+  }, function errorCallback(response) {
 
-    });
+
+    console.log(response);
+
+  });
 
   $scope.createNewGameController = function(){
     var newGameRoom = {
       method: 'POST',
-      url: 'http://b4ee01aa.ngrok.io/gamerooms',
+      url: 'http://e8e7678d.ngrok.io/gamerooms',
       data: { ownerId: $cookieStore.get('id'),
-              name: $scope.gameRoomName,
-              maxPlayers: $scope.gameRoomMaxPlayers ,
-              status: 'Waiting',
-              type: $scope.gameRoomType,
-              players:  $cookieStore.get('name'),
-              invited: $scope.selectedFriends
-      }
-    };
-    $http(newGameRoom).then(function successCallback(response) {
-      // this callback will be called asynchronously
-      // when the response is available
-
-      console.log(response);
-      socket.emit('create:room', $scope.gameRoomName);
-      $window.location.href = '/waiting';
-
-    }, function errorCallback(response) {
-      // called asynchronously if an error occurs
-      // or server returns response with an error status.
-      console.log(response);
-    });
+      name: $scope.gameRoomName,
+      maxPlayers: $scope.gameRoomMaxPlayers ,
+      status: 'Waiting',
+      type: $scope.gameRoomType,
+      players:  $cookieStore.get('name'),
+      invited: $scope.selectedFriends
+    }
   };
+  $http(newGameRoom).then(function successCallback(response) {
 
-  $http(req).then(function successCallback(response) {
     console.log(response);
-    $scope.gameRooms = response.data;
+    socket.emit('create:room', $scope.gameRoomName);
+    $window.location.href = '/waiting';
 
   }, function errorCallback(response) {
-    // called asynchronously if an error occurs
-    // or server returns response with an error status.
+
+
     console.log(response);
-    $scope.statusPage = 404;
-
-  },
-
-  $scope.newGameRoomController = function() {
-
-    $cookieStore.remove('id');
-    $cookieStore.remove('name');
-    $window.location.href = '/'
   });
+};
+
+$http(req).then(function successCallback(response) {
+  console.log(response);
+  $scope.gameRooms = response.data;
+
+}, function errorCallback(response) {
 
 
-  $scope.redirectUser = function(name, roomName, playersInRoom, gameRoomId){
+  console.log(response);
+  $scope.statusPage = 404;
 
-    playersInRoom.push(name);
+},
 
-    var putGameroom = {
-      method: 'PUT',
-      url: 'http://b4ee01aa.ngrok.io/gamerooms/'+gameRoomId ,
-      data: { players: playersInRoom } };
+$scope.newGameRoomController = function() {
+
+  $cookieStore.remove('id');
+  $cookieStore.remove('name');
+  $window.location.href = '/'
+});
+
+
+$scope.redirectUser = function(name, roomName, playersInRoom, gameRoomId){
+
+  playersInRoom.push(name);
+
+  var putGameroom = {
+    method: 'PUT',
+    url: 'http://e8e7678d.ngrok.io/gamerooms/'+gameRoomId ,
+    data: { players: playersInRoom } };
 
     console.log("Data ", putGameroom);
 
     $http(putGameroom).then(function successCallback(response) {
 
-        socket.emit('join:room', roomName);
-        $window.location.href = '/waiting';
+      socket.emit('join:room', roomName);
+      $window.location.href = '/waiting';
 
     }, function errorCallback(response) {
-        console.log(response);
+      console.log(response);
     });
 
 
@@ -259,9 +247,7 @@ loteriaGameControllers.controller('LoginController', ['$scope', '$http', '$rootS
     };
 
     $http(req).then(function successCallback(response) {
-      // this callback will be called asynchronously
-      // when the response is available
-      console.log("Id" + response.data.name);
+                  console.log("Id" + response.data.name);
       console.log("Name:" +response.data.id);
       $cookieStore.put('id', response.data.id);
       $cookieStore.put('name', response.data.name);
@@ -269,8 +255,8 @@ loteriaGameControllers.controller('LoginController', ['$scope', '$http', '$rootS
       $window.location.href = '/profile'
 
     }, function errorCallback(response) {
-      // called asynchronously if an error occurs
-      // or server returns response with an error status.
+
+
       console.log(response);
       $scope.loginError = true;
 
@@ -279,9 +265,9 @@ loteriaGameControllers.controller('LoginController', ['$scope', '$http', '$rootS
 }]);
 
 loteriaGameControllers.controller('LogoutController', ['$scope', '$http', '$rootScope', '$cookies', '$cookieStore', '$window', function ($scope, $http, $rootScope, $cookies, $cookieStore, $window){
-    $cookieStore.remove('id');
-    $cookieStore.remove('name');
-    $window.location.href = '/';
+  $cookieStore.remove('id');
+  $cookieStore.remove('name');
+  $window.location.href = '/';
 }]);
 
 loteriaGameControllers.controller('RegisterController',  ['$scope', '$http', '$rootScope', '$cookies', '$cookieStore', '$window', function ($scope, $http, $rootScope, $cookies, $cookieStore, $window){
@@ -307,17 +293,15 @@ loteriaGameControllers.controller('RegisterController',  ['$scope', '$http', '$r
     };
 
     $http(req).then(function successCallback(response) {
-      // this callback will be called asynchronously
-      // when the response is available
-      console.log(response);
+                  console.log(response);
       console.log("Id" + response.data.name);
       console.log("Name:" +response.data.id);
       $cookieStore.put('id', response.data.id);
       $cookieStore.put('name', response.data.name);
       $window.location.href = '/profile'
     }, function errorCallback(response) {
-      // called asynchronously if an error occurs
-      // or server returns response with an error status.
+
+
       console.log(response);
 
     });
@@ -331,8 +315,8 @@ loteriaGameControllers.controller('HeadController', ['$scope','$cookies', '$cook
 
 
   if($cookieStore.get('id')){
-      $scope.logged = true;
-      console.log("The user is logged");
+    $scope.logged = true;
+    console.log("The user is logged");
   }else{
     console.log("The user is NOT logged");
   }
@@ -364,68 +348,87 @@ loteriaGameControllers.controller('FooterController', ['$scope', '$location', fu
 }]);
 
 loteriaGameControllers.controller('GameroomController', ['$scope', '$http', '$rootScope', '$cookies', '$cookieStore', '$window', function ($scope, $http, $rootScope, $cookies, $cookieStore, $window){
+
+  var putGameroom = {
+    method: 'GET',
+    url: 'http://e8e7678d.ngrok.io/GameRoom/' + '' + '/Card/'
+  };
+
+  $scope.cardboard = [];
+
+  $http(putGameroom).then(function successCallback(response) {
+    $scope.cartas = response;
+  }, function errorCallback(response) {
+    console.log(response);
+  });
+
+  for(var i = 0; i<$scope.cartas.length; i++){
+    var carta = {name: $scope.cartas.name, clicked:false};
+    $scope.cardboard.push(carta);
+  }
   $scope.cardboard = [
     [{name:"la campana", clicked:false}, {name:'el alacran', clicked:false}, {name: 'el apache', clicked:false}, {name: 'el arbol', clicked:false}],
     [{name: 'el arpa', clicked:false}, {name:'el bandolon', clicked:false}, {name: 'el barril', clicked:false}, {name: 'el borracho', clicked:false}],
     [{name: 'el camaron', clicked:false}, {name: 'el cantarito', clicked:false}, {name: 'el catrin', clicked:false}, {name: 'el cazo', clicked:false}],
     [{name: 'el corazon', clicked:false}, {name: 'el cotorro', clicked:false}, {name: 'el diablito', clicked:false}, {name: 'el gallo', clicked:false}]
   ];
+
+  var endGame = function (){
+
+  }
 }]);
 
-loteriaGameControllers.controller('WaitingController', [ '$scope', '$http', '$rootScope', '$cookies', '$cookieStore', '$window', 'socket', function ($scope, $http, $rootScope, $cookies, $cookieStore, $window, socket){
-    socket.on('connection', function(){console.log("Holis")});
-    $scope.currentPlayers = 1;
-
+loteriaGameControllers.controller('WaitingController', ['$scope', '$http', '$rootScope', '$cookies', '$cookieStore', '$window', function ($scope, $http, $rootScope, $cookies, $cookieStore, $window){
+  console.log("Hola");
+  socket.on('connection', function(){console.log("Holis")});
+  $scope.currentPlayers = 1;
+  $scope.suggestStart = function() {
+    $window.location.href = '/gameroom'
+  }
 }]);
 
 loteriaGameControllers.controller('ScoreController', ['$scope', '$http', '$rootScope', '$cookies', '$cookieStore', '$window', function ($scope, $http, $rootScope, $cookies, $cookieStore, $window){
   console.log($cookieStore.get('country'));
   $scope.countryCompare = $cookieStore.get('country');
-    var loadingFriends = {
-      method: 'GET',
-      url: 'http://138.197.219.168:8000/Users/' + $cookieStore.get('id') +'/Friends',
-    };
-    $http(loadingFriends).then(function successCallback(response) {
-      // this callback will be called asynchronously
-      // when the response is available
-      $scope.friends = response.data;
+  var loadingFriends = {
+    method: 'GET',
+    url: 'http://138.197.219.168:8000/Users/' + $cookieStore.get('id') +'/Friends',
+  };
+  $http(loadingFriends).then(function successCallback(response) {
+            $scope.friends = response.data;
 
-    }, function errorCallback(response) {
-      // called asynchronously if an error occurs
-      // or server returns response with an error status.
-      console.log(response);
+  }, function errorCallback(response) {
 
-    });
 
-    var loadingWorld = {
-      method: 'GET',
-      url: 'http://138.197.219.168:8000/Scores/Global',
-    };
-    $http(loadingWorld).then(function successCallback(response) {
-      // this callback will be called asynchronously
-      // when the response is available
-      $scope.worlds = response.data;
+    console.log(response);
 
-    }, function errorCallback(response) {
-      // called asynchronously if an error occurs
-      // or server returns response with an error status.
-      console.log(response);
+  });
 
-    });
+  var loadingWorld = {
+    method: 'GET',
+    url: 'http://138.197.219.168:8000/Scores/Global',
+  };
+  $http(loadingWorld).then(function successCallback(response) {
+            $scope.worlds = response.data;
 
-    var loadingCountry = {
-      method: 'GET',
-      url: 'http://138.197.219.168:8000/Scores/' + $scope.countryCompare + '/Country',
-    };
-    $http(loadingCountry).then(function successCallback(response) {
-      // this callback will be called asynchronously
-      // when the response is available
-      $scope.countries = response.data;
+  }, function errorCallback(response) {
 
-    }, function errorCallback(response) {
-      // called asynchronously if an error occurs
-      // or server returns response with an error status.
-      console.log(response);
 
-    });
+    console.log(response);
+
+  });
+
+  var loadingCountry = {
+    method: 'GET',
+    url: 'http://138.197.219.168:8000/Scores/' + $scope.countryCompare + '/Country',
+  };
+  $http(loadingCountry).then(function successCallback(response) {
+            $scope.countries = response.data;
+
+  }, function errorCallback(response) {
+
+
+    console.log(response);
+
+  });
 }]);
