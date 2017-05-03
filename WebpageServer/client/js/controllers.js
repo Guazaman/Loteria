@@ -2,6 +2,14 @@
 * Created by Raptor on 13/06/16.
 */
 let loteriaGameControllers = angular.module('loteriaGameControllers', ['ngCookies']);
+var socket = io.connect('http://b4ee01aa.ngrok.io/');
+
+socket.on('connected', function(num){
+      console.log("se conencto a ", num);
+      $scope.currentPlayers = num;
+});
+
+
 
 loteriaGameControllers.controller('InicioController', [ '$scope', '$http', '$rootScope', '$cookies', '$cookieStore', '$window', function ($scope, $http, $rootScope, $cookies, $cookieStore, $window){
   console.log("Solicitando...");
@@ -11,6 +19,7 @@ loteriaGameControllers.controller('InicioController', [ '$scope', '$http', '$roo
 
 loteriaGameControllers.controller('ProfileController', ['$scope', '$http', '$rootScope', '$cookies', '$cookieStore', '$window', function ($scope, $http, $rootScope, $cookies, $cookieStore, $window){
   console.log("Solicitando...");
+
   console.log("Id: "+ $cookieStore.get('id'));
   console.log("Name: "+ $cookieStore.get('name'));
   var req = {
@@ -109,6 +118,9 @@ loteriaGameControllers.controller('GameRoomsController', ['$scope', '$http', '$r
     url: 'http://b4ee01aa.ngrok.io/gamerooms'
   };
 
+
+
+
   $scope.values = [2,3,4,5];
   $scope.selectedFriends = [];
   $scope.gameRoomType = 'public';
@@ -149,7 +161,11 @@ loteriaGameControllers.controller('GameRoomsController', ['$scope', '$http', '$r
     $http(newGameRoom).then(function successCallback(response) {
       // this callback will be called asynchronously
       // when the response is available
+      
       console.log(response);
+      socket.emit('create:room', $scope.gameRoomName);
+      $window.location.href = '/waiting';
+
     }, function errorCallback(response) {
       // called asynchronously if an error occurs
       // or server returns response with an error status.
@@ -158,12 +174,8 @@ loteriaGameControllers.controller('GameRoomsController', ['$scope', '$http', '$r
   };
 
   $http(req).then(function successCallback(response) {
-    // this callback will be called asynchronously
-    // when the response is available
     console.log(response);
     $scope.gameRooms = response.data;
-    //Un-comment this line for production
-    //loadFriends();
 
   }, function errorCallback(response) {
     // called asynchronously if an error occurs
@@ -179,6 +191,59 @@ loteriaGameControllers.controller('GameRoomsController', ['$scope', '$http', '$r
     $cookieStore.remove('name');
     $window.location.href = '/'
   });
+
+
+  $scope.redirectUser = function(name, roomName, playersInRoom, gameRoomId){
+
+    playersInRoom.push(name);
+
+    var putGameroom = {
+      method: 'PUT',
+      url: 'http://b4ee01aa.ngrok.io/gamerooms/'+gameRoomId ,
+      data: { players: playersInRoom } };
+ 
+    console.log("Data ", putGameroom);
+
+    $http(putGameroom).then(function successCallback(response) {
+        
+        socket.emit('join:room', roomName);
+        $window.location.href = '/waiting';
+
+    }, function errorCallback(response) {
+        console.log(response);
+    });
+
+
+  }
+
+
+  $scope.joinRoom = function(index) {
+
+    //$window.location.href = '/waiting';
+
+    let myName = $cookieStore.get('name');
+
+    let currentRoomName =  $scope.gameRooms[index].name;
+    let playersInRoom = $scope.gameRooms[index].players;
+    let numPlayers = $scope.gameRooms[index].players.length;
+    let maxPlayers = $scope.gameRooms[index].maxPlayers;
+    let gameroomId = $scope.gameRooms[index]._id;
+
+    if($scope.gameRooms[index].type == 'private'){
+      if(playersInRoom.indexOf(myName) == -1){
+        $window.alert("not invited");
+      }else{
+        if(numPlayers < maxPlayers){
+          $scope.redirectUser(myName, currentRoomName, playersInRoom, gameroomId); 
+        }
+      }
+    }else{
+      if(numPlayers < maxPlayers){
+        $scope.redirectUser(myName, currentRoomName, playersInRoom, gameroomId);
+      }
+    }
+  }
+
 }]);
 
 loteriaGameControllers.controller('LoginController', ['$scope', '$http', '$rootScope', '$cookies', '$cookieStore', '$window', function ($scope, $http, $rootScope, $cookies, $cookieStore, $window){
@@ -300,7 +365,9 @@ loteriaGameControllers.controller('FooterController', ['$scope', '$location', fu
 
 }]);
 
-loteriaGameControllers.controller('WaitingController', ['$scope',  'header', function($scope, header){
+loteriaGameControllers.controller('WaitingController', [ '$scope', '$http', '$rootScope', '$cookies', '$cookieStore', '$window', function ($scope, $http, $rootScope, $cookies, $cookieStore, $window){
+    
+    $scope.currentPlayers = 1;
 
 }]);
 
