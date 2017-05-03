@@ -18,10 +18,12 @@
         <div class="card ">
           <div class="card-content">
             <span class="card-title">Available Game Rooms</span>
+            <div class="center-align yellow-text" ng-show='statusPage==404'>
+              <i class="material-icons large">warning</i>  <h3>   Sorry, there are not Gamerooms available for the moment. :( </h3>
+            </div>
             <div class="rooms-list" ng-repeat = "gameRoom in gameRooms">
               <div ng-if="gameRoom.status == 'Waiting'">
                 <ul class="collection">
-
                   <li class="collection-item avatar">
                     <img src="img/default-avatar.png" alt="" class="circle">
                     <span class="title">{{gameRoom.name}}</span>
@@ -29,7 +31,6 @@
                     <a class="secondary-content waves-effect waves-light btn btn-small">Join</a>
                   </li>
                 </ul>
-
               </div>
             </div>
           </div>
