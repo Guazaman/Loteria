@@ -104,7 +104,7 @@ loteriaGameControllers.controller('ProfileController', ['$scope', '$http', '$roo
 loteriaGameControllers.controller('GameRoomsController', ['$scope', '$http', '$rootScope', '$cookies', '$cookieStore', '$window', function ($scope, $http, $rootScope, $cookies, $cookieStore, $window){
   var req = {
     method: 'GET',
-    url: 'https://5e8d0c8e.ngrok.io/gamerooms'
+    url: 'http://85f1211f.ngrok.io/gamerooms'
   };
 
   $scope.values = [2,3,4,5];
@@ -114,7 +114,7 @@ loteriaGameControllers.controller('GameRoomsController', ['$scope', '$http', '$r
   $scope.createNewGameController = function(){
     var newGameRoom = {
       method: 'POST',
-      url: 'https://5e8d0c8e.ngrok.io/gamerooms',
+      url: 'http://85f1211f.ngrok.io/gamerooms',
       data: { ownerId: $cookieStore.get('id'),
               name: $scope.gameRoomName,
               createdAt: today,
