@@ -238,7 +238,7 @@
     function ($rootScope, $location, $cookieStore, $http) {
         $rootScope.$on('$locationChangeStart', function (event, next, current) {
             // redirect to login page if not logged in
-            if ($location.path() !== '/login' && $location.path() !== '/' && !$cookieStore.get('id')) {
+            if ($location.path() !== '/login' &&  $location.path() !== '/register' && $location.path() !== '/' && !$cookieStore.get('id')) {
                 $location.path('/login');
             }
         });

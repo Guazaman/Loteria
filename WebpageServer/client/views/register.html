@@ -31,7 +31,7 @@
               </div>
 
               <div class="input-field col s12">
-                <input id="country" type="text" class="validate" ng-model="registerCountry" ng-model="registerCountry">
+                <input id="country" type="text" class="validate" ng-model="registerCountry" ng-model="registerCountry" ng-keyup="$event.keyCode == 13 && registerController()">
                 <label for="country">Country</label>
               </div>
 
