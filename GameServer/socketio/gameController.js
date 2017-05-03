@@ -1,15 +1,19 @@
-var manager = require("./../socket.js");
+var manager = require("./gameRoomManager.js");
 manager.createRoom("Kim");
 
 const FULL = -1;
+const seconds = 1;
+const CARD_DELAY = seconds * 1000;
+
 var interval;
 
 exports = module.exports = function(io){
 
 	io.on('connection', function(socket){
 
-		console.log("a connection");
+		console.log("user connected");
 
+		/* When a socket that is connected disconnects */
 		socket.on('disconnect', function(){
 	 		let room = socket.roomName;
 			if(room){
@@ -19,29 +23,33 @@ exports = module.exports = function(io){
 			}
   		});
 
-  		socket.on('createRoom', function(room){
+		/* Create an instance of a Room inside the map */
+  		socket.on('create:room', function(room){
   			manager.createRoom(room);
   		});
 
-	  	socket.on('joinRoom', function(room) {
+  		/* Add players (socket) to an instance of a room */
+	  	socket.on('join:room', function(room) {
+
+	  		if(!manager.checkRoom(room))
+	  			return io.to(socket.id).emit('invalid', room);
 
 	        socket.join(room);
 	        manager.addPlayerToRoom(room, socket.id);
-	        console.log(manager);
+
 	        let players = manager.getRoomPlayers(room);
 	        socket.roomName = room;
-
 			io.sockets.in(room).emit('connected', players);
 	    });
 
-	  	socket.on('startGame', function(room){
+	  	/* Start emiting card evnts */
+	  	socket.on('start:game', function(room){
 
 	  		currentGame = manager.startGame(room);
 	  		console.log("juego comenzando!");
 
 	  		for(i in currentGame.roomPlayers){
-	  			console.log("sending this !!! ", currentGame.roomPlayers[i].grid);
-	  			io.to(currentGame.roomPlayers[i].socketId).emit('emitCard', currentGame.roomPlayers[i].grid);
+	  			io.to(currentGame.roomPlayers[i].socketId).emit('card:emit', currentGame.roomPlayers[i].grid);
 	  		}
 
 	  		interval = setInterval(function() {
@@ -49,24 +57,27 @@ exports = module.exports = function(io){
 	  			if(currentGame.hasCards()){
 	  				let currentCard =  currentGame.drawCard();
 	  				console.log(currentCard);
-	  				io.sockets.in(room).emit('cardDrawing', currentCard);
+	  				io.sockets.in(room).emit('card:draw', currentCard);
 	  			}else{
 	  				clearInterval(this);
-	  				io.sockets.in(room).emit('endedGame', 'draw');
+	  				io.sockets.in(room).emit('end:game', 'draw');
+
 	  			}
-	  		}, 500);
+	  		}, CARD_DELAY);
 
 	  	});
 
-	  	socket.on('proclaimWin', function() {
+	  	/* Check for an user card for a valid win */
+	  	socket.on('proclaim:win', function() {
 	  		let room = socket.roomName;
 			if(room){
-	  			var result = manager.checkPlayer(room, socket.id);
+	  			var validWinner = manager.checkPlayer(room, socket.id);
+	  			console.log("Valid? ", validWinner);
 	  		}
-	  		if(result){
+	  		if(validWinner){
 	  			clearInterval(interval);
-	  			io.to(socket.id).emit('winner');
-	  			io.sockets.in(room).emit('endedGame', 'player');
+	  			io.to(socket.id).emit('win');
+	  			io.sockets.in(room).emit('end:game', 'player');
 	  		}
 	    });
 
