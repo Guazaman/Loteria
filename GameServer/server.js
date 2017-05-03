@@ -1,6 +1,9 @@
+
 // INITIAL SETUP - import dependencies
-var express  = require('express');
-var app      = express();                               
+var app = require('express')();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+
 var mongoose = require('mongoose');                     
 var morgan = require('morgan');             			
 var bodyParser = require('body-parser');    			
@@ -27,10 +30,12 @@ app.use(function(req, res, next){
     next();
 });
 
+var gameController = require('./controllers/gameController')(io);
 // Routes API, load them to be used by Express.
 require('./app/router/GameRoom/controller.js')(app);
 
 
 // Set app to listen (start app: server.js)
-app.listen(port);
-console.log("App listening on port " + port);
+http.listen(port, function(){
+  console.log('listening on *:', port);
+});
