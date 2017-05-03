@@ -1,10 +1,21 @@
 
 .container {
-  width: 30%;
+  width: 50%;
   padding-bottom: 30%;
   margin: auto;
   top: 0;
   right: 0;
   left: 0;
-  height: 365px;
+  height: 15px;
+}
+
+.row{
+  max-height: 10px;
+  height: 100%;
+}
+
+/* resize images */
+.container img {
+    width: 100%;
+    height: auto;
 }
