@@ -2,14 +2,12 @@
 * Created by Raptor on 13/06/16.
 */
 let loteriaGameControllers = angular.module('loteriaGameControllers', ['ngCookies']);
-var socket = io.connect('http://b4ee01aa.ngrok.io/');
+var socket = io.connect('http://fd4e12aa.ngrok.io');
 
 socket.on('connected', function(num){
       console.log("se conencto a ", num);
       $scope.currentPlayers = num;
 });
-
-
 
 loteriaGameControllers.controller('InicioController', [ '$scope', '$http', '$rootScope', '$cookies', '$cookieStore', '$window', function ($scope, $http, $rootScope, $cookies, $cookieStore, $window){
   console.log("Solicitando...");
@@ -374,8 +372,8 @@ loteriaGameControllers.controller('GameroomController', ['$scope', '$http', '$ro
   ];
 }]);
 
-loteriaGameControllers.controller('WaitingController', [ '$scope', '$http', '$rootScope', '$cookies', '$cookieStore', '$window', function ($scope, $http, $rootScope, $cookies, $cookieStore, $window){
-
+loteriaGameControllers.controller('WaitingController', [ '$scope', '$http', '$rootScope', '$cookies', '$cookieStore', '$window', 'socket', function ($scope, $http, $rootScope, $cookies, $cookieStore, $window, socket){
+    socket.on('connection', function(){console.log("Holis")});
     $scope.currentPlayers = 1;
 
 }]);
