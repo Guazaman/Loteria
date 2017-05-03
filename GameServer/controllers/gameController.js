@@ -1,7 +1,8 @@
 var manager = require("./../socket.js");
-manager.createRoom("Kim", "001");
+manager.createRoom("Kim");
 
 const FULL = -1;
+var interval;
 
 exports = module.exports = function(io){
 
@@ -39,10 +40,11 @@ exports = module.exports = function(io){
 	  		console.log("juego comenzando!");
 
 	  		for(i in currentGame.roomPlayers){
-	  			io.to(currentGame.roomPlayers[i].userId).emit('emitCard', currentGame.roomPlayers[i].grid);
+	  			console.log("sending this !!! ", currentGame.roomPlayers[i].grid);
+	  			io.to(currentGame.roomPlayers[i].socketId).emit('emitCard', currentGame.roomPlayers[i].grid);
 	  		}
 
-	  		var interval = setInterval(function() {
+	  		interval = setInterval(function() {
 
 	  			if(currentGame.hasCards()){
 	  				let currentCard =  currentGame.drawCard();
@@ -52,7 +54,7 @@ exports = module.exports = function(io){
 	  				clearInterval(this);
 	  				io.sockets.in(room).emit('endedGame', 'draw');
 	  			}
-	  		}, 2000);
+	  		}, 500);
 
 	  	});
 
@@ -61,14 +63,11 @@ exports = module.exports = function(io){
 			if(room){
 	  			var result = manager.checkPlayer(room, socket.id);
 	  		}
-
 	  		if(result){
-	  			console.log("YEY! GANASTE");
+	  			clearInterval(interval);
 	  			io.to(socket.id).emit('winner');
 	  			io.sockets.in(room).emit('endedGame', 'player');
 	  		}
-
-	  		console.log(result);
 	    });
 
 	});

@@ -9,7 +9,7 @@ var morgan = require('morgan');
 var bodyParser = require('body-parser');    			
 var methodOverride = require('method-override'); 		
 
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 8081;
 
 // Load DB configuration, and connect using mongoose.
 mongoose.connect('mongodb://localhost:27017/gameserver');
